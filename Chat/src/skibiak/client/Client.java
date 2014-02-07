@@ -41,7 +41,6 @@ public class Client implements Runnable {
 	}
 
 	public String readServerMessages() throws IOException {
-		
 		return in.readLine();
 	}
 

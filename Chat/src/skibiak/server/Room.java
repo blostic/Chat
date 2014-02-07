@@ -69,8 +69,6 @@ public abstract class Room implements Runnable {
 
 	public abstract void readMessages() throws IOException;
 
-	public abstract void removeUnresponsiveClients();
-
 	public String getRoomMaster() {
 		return roomMaster;
 	}

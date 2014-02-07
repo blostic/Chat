@@ -3,8 +3,10 @@ package skibiak.server;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Level;
@@ -13,8 +15,8 @@ import org.apache.log4j.PropertyConfigurator;
 
 public class Server {
 	private static Logger logger = Logger.getLogger(Server.class);
-	private int port;
 	private Map<String, Room> rooms;
+	private int port;
 
 	public Map<String, Room> getRooms() {
 		return rooms;
@@ -24,12 +26,12 @@ public class Server {
 		this.port = port;
 		this.rooms = Collections.synchronizedMap(new HashMap<String, Room>());
 		rooms.put("MainRoom", RoomFactory.getInstance(this, "MainRoom",
-				"PublicRoom", "Everything about Everyone", "bb"));
+				"public", "Everything about Everyone", "bb"));
 	}
 
 	public void runServer() throws IOException {
-		while (true) {
-			try (ServerSocket socket = new ServerSocket(this.port)) {
+		try (ServerSocket socket = new ServerSocket(port)) {
+			while (true) {
 				Socket clientSocket = socket.accept();
 				new EstablishUser(clientSocket);
 			}
@@ -49,9 +51,20 @@ public class Server {
 		}
 	}
 
+	public boolean containUser(String nickname) {
+		for (Room room : rooms.values()) {
+			for (ClientConnectionAdapter clientConnection : room.clients) {
+				if (clientConnection.getNickname().equals(nickname)) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
 	public void addUserToRoom(ClientConnectionAdapter client, String roomName) {
 		if (rooms.containsKey(roomName)) {
-			Room room = rooms.get(roomName);;
+			Room room = rooms.get(roomName);
 			client.setPresentRoom(room);
 			logger.info("User " + client.getNickname() + " added to room "
 					+ roomName);
@@ -63,11 +76,23 @@ public class Server {
 		}
 	}
 
+	public void removeUnresponsiveClients() {
+		for (Room room : rooms.values()) {
+			List<ClientConnectionAdapter> clientsToRemove = new ArrayList<ClientConnectionAdapter>();
+			for (ClientConnectionAdapter clientConnection : room.clients) {
+				if (clientConnection.clientDisconected()) {
+					clientsToRemove.add(clientConnection);
+				}
+			}
+			room.clients.removeAll(clientsToRemove);
+		}
+	}
+	
 	public static void main(String[] args) {
 		try {
-
 			PropertyConfigurator.configure("log4j.properties");
 			logger.setLevel(Level.INFO);
+
 			int port = 4000;
 			logger.info("Server is listening at port " + port);
 			new Server(port).runServer();
@@ -77,7 +102,7 @@ public class Server {
 			e.printStackTrace();
 		}
 	}
-	
+
 	private class EstablishUser extends Thread {
 		private Socket clientSocket;
 
@@ -90,42 +115,36 @@ public class Server {
 		public void run() {
 			ClientConnectionAdapter client = new ClientConnectionAdapter(
 					clientSocket, rooms.get("MainRoom"));
+			Boolean nickFree = false;
+			client.sendMessage("Please choose a nickname: ");
+			String nickname = "";
 			try {
-				Boolean nickFree = false;
-				client.sendMessage("Please choose a nickname: ");
-				String nickname = "";
 				while (!nickFree) {
-					nickFree = true;
 					nickname = client.readMessage();
 					if (nickname.length() > 3) {
-						for (Room room : Server.this.rooms.values()) {
-							for (ClientConnectionAdapter clientConnection : room.clients) {
-								if (clientConnection.getNickname().equals(
-										nickname)) {
-									nickFree = false;
-									client.sendMessage("Sorry, nickname "
-											+ nickname
-											+ " is already in use. Try something else.");
-									break;
-								}
-							}
-							if (!nickFree) {
-								break;
+						nickFree = !containUser(nickname);
+					} else {
+						nickFree = false;
+						client.sendMessage("Nickname must have at least 4 letters");
+					}
+					if (nickFree) {
+						synchronized (rooms.get("MainRoom")) {
+							if (!containUser(nickname)) {
+								client.setNickname(nickname);
+								client.sendMessage("Welcome " + nickname + "!");
+								logger.info("User" + nickname + " has logged");
+								rooms.get("MainRoom").addClient(client);
 							}
 						}
 					} else {
-						nickFree = false;
-						client.sendMessage("Sorry, nickname must have at least 4 letters");
+						client.sendMessage("Nickname " + nickname
+								+ " is already in use. Try something else.");
 					}
 				}
-				client.setNickname(nickname);
-				client.sendMessage("Welcome " + nickname + "!");
-				logger.info("User" + nickname + " has logged");
 			} catch (IOException e) {
 				e.printStackTrace();
+				logger.error("User left the chat before choosing nickname");
 			}
-
-			Server.this.rooms.get("MainRoom").addClient(client);
 		}
 	}
 

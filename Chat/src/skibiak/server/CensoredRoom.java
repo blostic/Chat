@@ -27,10 +27,4 @@ public class CensoredRoom extends Room {
 
 	}
 
-	@Override
-	public void removeUnresponsiveClients() {
-		// TODO Auto-generated method stub
-
-	}
-
 }

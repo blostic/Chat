@@ -9,6 +9,9 @@ import java.net.Socket;
 public class ClientConnectionAdapter {
 	private String nickname;
 	private Room presentRoom;
+	private PrintWriter out;
+	private BufferedReader in;
+
 	public Room getPresentRoom() {
 		return presentRoom;
 	}
@@ -17,11 +20,7 @@ public class ClientConnectionAdapter {
 		this.presentRoom.removeClient(this);
 		this.presentRoom = presentRoom;
 		presentRoom.clients.add(this);
-		
 	}
-
-	private PrintWriter out;
-	private BufferedReader in;
 
 	public ClientConnectionAdapter(Socket socket, Room presetRoom) {
 		this.presentRoom = presetRoom;

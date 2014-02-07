@@ -1,13 +1,12 @@
 package skibiak.server;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import com.beust.jcommander.ParameterException;
 
 public class PublicRoom extends Room {
-	public PublicRoom(Server server, String roomName, String chatTopic, String roomMaster) {
+	public PublicRoom(Server server, String roomName, String chatTopic,
+			String roomMaster) {
 		super(server, roomName, chatTopic, roomMaster);
 		this.startRoom();
 	}
@@ -28,41 +27,25 @@ public class PublicRoom extends Room {
 
 	@Override
 	public void annouceMessage(String message) {
-		System.out.println("RECEIVER MESSAGE [room " + this.getRoomName() + "] " + message);
-		for (ClientConnectionAdapter clientConnection : this.clients) {
-			clientConnection.sendMessage(message);
+		System.out.println("RECEIVER MESSAGE [room " + getRoomName() + "] "
+				+ message);
+		for (ClientConnectionAdapter connection : clients) {
+			connection.sendMessage(message);
 		}
 	}
 
 	@Override
 	public void readMessages() throws IOException {
-		for (ClientConnectionAdapter clientConnection : this.clients) {
-			if (clientConnection.containMessage()) {
-				String message = clientConnection.readMessage();
-				if (!message.startsWith("#")){
-					annouceMessage(clientConnection.getNickname() + ": " +message);					
-				}else{
-					try {
-						new ClientRequestHandler(server, clientConnection)
-								.parseCommand(message);
-					} catch (ParameterException e) {
-						clientConnection
-								.sendMessage("No such option(s), use #HELP to check correct syntax");
-					}
+		for (ClientConnectionAdapter connection : clients) {
+			if (connection.containMessage()) {
+				String message = connection.readMessage();
+				if (!message.startsWith("#")) {
+					annouceMessage(connection.getNickname() + ": " + message);
+				} else {
+					new ClientRequestHandler(server, connection).parseCommand(message);
 				}
-			}
+		}
 		}
 	}
 
-	@Override
-	public void removeUnresponsiveClients() {
-		List<ClientConnectionAdapter> clientsToRemove = new ArrayList<ClientConnectionAdapter>();
-		for (ClientConnectionAdapter clientConnection : this.clients) {
-			if (clientConnection.clientDisconected()) {
-				clientsToRemove.add(clientConnection);
-			}
-		}
-		this.clients.removeAll(clientsToRemove);
-
-	}
 }
