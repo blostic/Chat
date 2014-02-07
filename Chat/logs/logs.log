@@ -1,0 +1,188 @@
+2014-02-06 20:36:19,218 - skibiak.server.Server - INFO - Server is listening at port 4000
+2014-02-06 20:36:27,640 - skibiak.server.Server - INFO - Userberta has logged
+2014-02-06 20:36:27,640 - skibiak.server.Room - INFO - Client berta entered room MainRoom
+2014-02-06 21:15:06,300 - skibiak.server.Server - INFO - Server is listening at port 4000
+2014-02-06 21:15:21,173 - skibiak.server.Server - INFO - UserPiotr  has logged
+2014-02-06 21:15:21,174 - skibiak.server.Room - INFO - Client Piotr  entered room MainRoom
+2014-02-06 21:16:23,647 - skibiak.server.Server - INFO - Server is listening at port 4000
+2014-02-06 21:16:32,590 - skibiak.server.Server - INFO - UserPiotr has logged
+2014-02-06 21:16:32,591 - skibiak.server.Room - INFO - Client Piotr entered room MainRoom
+2014-02-06 22:00:48,437 - skibiak.server.Server - INFO - Server is listening at port 4000
+2014-02-06 22:00:59,373 - skibiak.server.Server - INFO - UserBolek has logged
+2014-02-06 22:00:59,375 - skibiak.server.Room - INFO - Client Bolek entered room MainRoom
+2014-02-06 22:01:02,184 - skibiak.server.Server - INFO - UserBenek has logged
+2014-02-06 22:01:02,184 - skibiak.server.Room - INFO - Client Benek entered room MainRoom
+2014-02-06 22:15:14,705 - skibiak.server.Server - INFO - Server is listening at port 4000
+2014-02-06 22:15:25,681 - skibiak.server.Server - INFO - Userbenek has logged
+2014-02-06 22:15:25,682 - skibiak.server.Room - INFO - Client benek entered room MainRoom
+2014-02-06 23:22:55,201 - skibiak.server.Server - INFO - Server is listening at port 4000
+2014-02-06 23:23:04,437 - skibiak.server.Server - INFO - UserBerta has logged
+2014-02-06 23:23:39,459 - skibiak.server.Server - INFO - Server is listening at port 4000
+2014-02-06 23:23:49,703 - skibiak.server.Server - INFO - UserBerta has logged
+2014-02-06 23:23:49,703 - skibiak.server.Room - INFO - Client Berta entered room MainRoom
+2014-02-06 23:23:55,813 - skibiak.server.Server - INFO - UserAdam has logged
+2014-02-06 23:23:55,814 - skibiak.server.Room - INFO - Client Adam entered room MainRoom
+2014-02-06 23:24:07,928 - skibiak.server.Server - INFO - Berta use help
+2014-02-06 23:37:57,885 - skibiak.server.Server - INFO - Server is listening at port 4000
+2014-02-06 23:38:07,121 - skibiak.server.Server - INFO - UserBart has logged
+2014-02-06 23:38:07,122 - skibiak.server.Room - INFO - Client Bart entered room MainRoom
+2014-02-06 23:38:16,048 - skibiak.server.Server - INFO - UserAlex has logged
+2014-02-06 23:38:16,049 - skibiak.server.Room - INFO - Client Alex entered room MainRoom
+2014-02-06 23:38:42,266 - skibiak.server.Server - INFO - Alex use help
+2014-02-06 23:40:01,260 - skibiak.server.Server - ERROR - Unknow option provided by Alex
+2014-02-06 23:41:16,938 - skibiak.server.Server - ERROR - Unknow option provided by Alex
+2014-02-06 23:41:40,602 - skibiak.server.Server - ERROR - Unknow option provided by Alex
+2014-02-06 23:42:17,104 - skibiak.server.Server - ERROR - Unknow option provided by Alex
+2014-02-06 23:42:48,801 - skibiak.server.Server - ERROR - Unknow option provided by Alex
+2014-02-07 00:01:44,840 - skibiak.server.Server - INFO - Server is listening at port 4000
+2014-02-07 00:01:53,351 - skibiak.server.Server - INFO - Useradas has logged
+2014-02-07 00:01:53,352 - skibiak.server.Room - INFO - Client adas entered room MainRoom
+2014-02-07 00:01:57,235 - skibiak.server.Server - INFO - adas use help
+2014-02-07 00:02:52,164 - skibiak.server.Server - ERROR - Unknow option provided by adas
+2014-02-07 00:04:46,908 - skibiak.server.Server - INFO - Server is listening at port 4000
+2014-02-07 00:05:01,694 - skibiak.server.Server - INFO - Userbenek has logged
+2014-02-07 00:05:01,695 - skibiak.server.Room - INFO - Client benek entered room MainRoom
+2014-02-07 00:05:07,921 - skibiak.server.Server - INFO - benek use help
+2014-02-07 00:05:28,790 - skibiak.server.Server - ERROR - Unknow option provided by benek
+2014-02-07 00:05:58,971 - skibiak.server.Server - INFO - Server is listening at port 4000
+2014-02-07 00:06:07,486 - skibiak.server.Server - INFO - Userbenek has logged
+2014-02-07 00:06:07,487 - skibiak.server.Room - INFO - Client benek entered room MainRoom
+2014-02-07 00:06:11,691 - skibiak.server.Server - ERROR - Unknow option provided by benek
+2014-02-07 00:07:07,921 - skibiak.server.Server - INFO - Server is listening at port 4000
+2014-02-07 00:07:16,171 - skibiak.server.Server - INFO - Userbene has logged
+2014-02-07 00:07:16,172 - skibiak.server.Room - INFO - Client bene entered room MainRoom
+2014-02-07 00:07:20,937 - skibiak.server.Server - ERROR - Unknow option provided by bene
+2014-02-07 00:13:36,302 - skibiak.server.Server - INFO - Server is listening at port 4000
+2014-02-07 00:13:45,740 - skibiak.server.Server - INFO - Usersdfg has logged
+2014-02-07 00:13:45,742 - skibiak.server.Room - INFO - Client sdfg entered room MainRoom
+2014-02-07 00:13:49,229 - skibiak.server.Server - ERROR - Unknow option provided by sdfg
+2014-02-07 00:15:27,967 - skibiak.server.Server - INFO - Server is listening at port 4000
+2014-02-07 00:15:37,469 - skibiak.server.Server - INFO - UserBasd has logged
+2014-02-07 00:15:37,470 - skibiak.server.Room - INFO - Client Basd entered room MainRoom
+2014-02-07 00:15:45,500 - skibiak.server.Server - ERROR - Unknow option provided by Basd
+2014-02-07 00:17:26,408 - skibiak.server.Server - INFO - Server is listening at port 4000
+2014-02-07 00:17:33,384 - skibiak.server.Server - INFO - Usersdfsdf has logged
+2014-02-07 00:17:33,385 - skibiak.server.Room - INFO - Client sdfsdf entered room MainRoom
+2014-02-07 00:17:36,210 - skibiak.server.Server - ERROR - Unknow option provided by sdfsdf
+2014-02-07 00:22:36,919 - skibiak.server.Server - INFO - Server is listening at port 4000
+2014-02-07 00:22:45,339 - skibiak.server.Server - INFO - Usertest has logged
+2014-02-07 00:22:45,340 - skibiak.server.Room - INFO - Client test entered room MainRoom
+2014-02-07 00:29:56,476 - skibiak.server.Server - INFO - Server is listening at port 4000
+2014-02-07 00:30:07,376 - skibiak.server.Server - INFO - Userbarta has logged
+2014-02-07 00:30:07,377 - skibiak.server.Room - INFO - Client barta entered room MainRoom
+2014-02-07 00:31:22,914 - skibiak.server.Server - INFO - Server is listening at port 4000
+2014-02-07 00:31:34,371 - skibiak.server.Server - INFO - UserBerta has logged
+2014-02-07 00:31:34,372 - skibiak.server.Room - INFO - Client Berta entered room MainRoom
+2014-02-07 00:31:39,138 - skibiak.server.Server - INFO - Berta change topic to topic
+2014-02-07 00:31:54,486 - skibiak.server.Server - INFO - Berta change topic to topic
+2014-02-07 00:32:48,638 - skibiak.server.Server - INFO - Server is listening at port 4000
+2014-02-07 00:33:00,337 - skibiak.server.Server - INFO - UserBerta has logged
+2014-02-07 00:33:00,338 - skibiak.server.Room - INFO - Client Berta entered room MainRoom
+2014-02-07 00:33:04,654 - skibiak.server.Server - INFO - Berta change topic to ciekawe jak to bedzie wygladac
+2014-02-07 00:35:35,482 - skibiak.server.Server - INFO - Server is listening at port 4000
+2014-02-07 00:35:44,136 - skibiak.server.Server - INFO - UserBerta has logged
+2014-02-07 00:35:44,137 - skibiak.server.Room - INFO - Client Berta entered room: MainRoom
+2014-02-07 00:36:02,725 - skibiak.server.Server - INFO - Berta changed topic to: Nowy temat prosze pansktwa
+2014-02-07 00:54:47,598 - skibiak.server.Server - INFO - Server is listening at port 4000
+2014-02-07 00:55:00,482 - skibiak.server.Server - INFO - UserBerta has logged
+2014-02-07 00:55:00,483 - skibiak.server.Room - INFO - Client Berta entered room: MainRoom
+2014-02-07 00:55:03,322 - skibiak.server.Server - INFO - UserAlex has logged
+2014-02-07 00:55:03,323 - skibiak.server.Room - INFO - Client Alex entered room: MainRoom
+2014-02-07 00:55:14,649 - skibiak.server.Server - INFO - Alex used help
+2014-02-07 00:55:59,203 - skibiak.server.Server - INFO - Server is listening at port 4000
+2014-02-07 00:56:10,929 - skibiak.server.Server - INFO - UserBlost has logged
+2014-02-07 00:56:10,930 - skibiak.server.Room - INFO - Client Blost entered room: MainRoom
+2014-02-07 00:56:15,489 - skibiak.server.Server - INFO - UserPiotr has logged
+2014-02-07 00:56:15,490 - skibiak.server.Room - INFO - Client Piotr entered room: MainRoom
+2014-02-07 00:57:20,504 - skibiak.server.Server - INFO - Piotr changed topic to: New Topic
+2014-02-07 00:59:43,614 - skibiak.server.Server - INFO - Piotr used help
+2014-02-07 01:34:28,037 - skibiak.server.Server - INFO - Server is listening at port 4000
+2014-02-07 01:34:40,803 - skibiak.server.Server - INFO - UserPiotr has logged
+2014-02-07 01:34:40,803 - skibiak.server.Room - INFO - Client Piotr entered room: MainRoom
+2014-02-07 01:34:43,924 - skibiak.server.Server - INFO - UserAlex has logged
+2014-02-07 01:34:43,924 - skibiak.server.Room - INFO - Client Alex entered room: MainRoom
+2014-02-07 01:35:13,463 - skibiak.server.Server - INFO - Alex used help
+2014-02-07 01:36:00,980 - skibiak.server.Server - ERROR - Unknow option provided by Alex
+2014-02-07 01:36:45,229 - skibiak.server.Server - INFO - Server is listening at port 4000
+2014-02-07 01:37:04,682 - skibiak.server.Server - INFO - UserPiotr has logged
+2014-02-07 01:37:04,683 - skibiak.server.Room - INFO - Client Piotr entered room: MainRoom
+2014-02-07 01:37:06,670 - skibiak.server.Server - INFO - UserAdam has logged
+2014-02-07 01:37:06,673 - skibiak.server.Room - INFO - Client Adam entered room: MainRoom
+2014-02-07 01:37:11,561 - skibiak.server.Server - INFO - Adam used help
+2014-02-07 01:37:38,237 - skibiak.server.Server - INFO - User Adam added room Teens
+2014-02-07 01:39:59,461 - skibiak.server.Server - INFO - Server is listening at port 4000
+2014-02-07 01:40:10,696 - skibiak.server.Server - INFO - UserPiotr has logged
+2014-02-07 01:40:10,697 - skibiak.server.Room - INFO - Client Piotr entered room: MainRoom
+2014-02-07 01:40:12,530 - skibiak.server.Server - INFO - UserAdam has logged
+2014-02-07 01:40:12,531 - skibiak.server.Room - INFO - Client Adam entered room: MainRoom
+2014-02-07 01:40:26,840 - skibiak.server.Server - INFO - Adam used help
+2014-02-07 01:41:01,033 - skibiak.server.Room - INFO - Client Adam left room: MainRoom
+2014-02-07 01:41:01,034 - skibiak.server.Server - INFO - User Adam added room teeens
+2014-02-07 01:45:05,237 - skibiak.server.Server - INFO - Server is listening at port 4000
+2014-02-07 01:45:16,143 - skibiak.server.Server - INFO - Userpiotr has logged
+2014-02-07 01:45:16,144 - skibiak.server.Room - INFO - Client piotr entered room: MainRoom
+2014-02-07 01:45:18,881 - skibiak.server.Server - INFO - Useralex has logged
+2014-02-07 01:45:18,882 - skibiak.server.Room - INFO - Client alex entered room: MainRoom
+2014-02-07 01:45:24,674 - skibiak.server.Room - INFO - Client alex left room: MainRoom
+2014-02-07 01:45:24,675 - skibiak.server.Server - INFO - User alex added room teeens
+2014-02-07 01:45:36,008 - skibiak.server.Server - INFO - alex used help
+2014-02-07 01:47:35,728 - skibiak.server.Server - INFO - Userales has logged
+2014-02-07 01:47:35,729 - skibiak.server.Room - INFO - Client ales entered room: MainRoom
+2014-02-07 01:48:01,202 - skibiak.server.Server - INFO - Userasdd has logged
+2014-02-07 01:48:01,202 - skibiak.server.Room - INFO - Client asdd entered room: MainRoom
+2014-02-07 01:52:08,246 - skibiak.server.Server - INFO - Server is listening at port 4000
+2014-02-07 01:52:18,954 - skibiak.server.Server - INFO - Userpiotr has logged
+2014-02-07 01:52:18,955 - skibiak.server.Room - INFO - Client piotr entered room: MainRoom
+2014-02-07 01:52:21,335 - skibiak.server.Server - INFO - Useradam has logged
+2014-02-07 01:52:21,336 - skibiak.server.Room - INFO - Client adam entered room: MainRoom
+2014-02-07 01:52:53,078 - skibiak.server.Room - INFO - Client piotr left room: MainRoom
+2014-02-07 01:52:53,080 - skibiak.server.Server - INFO - User piotr added room teeens
+2014-02-07 01:54:35,909 - skibiak.server.Server - ERROR - Unknow option provided by adam
+2014-02-07 01:59:24,462 - skibiak.server.Server - INFO - Server is listening at port 4000
+2014-02-07 01:59:36,413 - skibiak.server.Server - INFO - Userpitor has logged
+2014-02-07 01:59:36,413 - skibiak.server.Room - INFO - Client pitor entered room: MainRoom
+2014-02-07 01:59:39,338 - skibiak.server.Server - INFO - Userskibiak has logged
+2014-02-07 01:59:39,339 - skibiak.server.Room - INFO - Client skibiak entered room: MainRoom
+2014-02-07 02:00:00,263 - skibiak.server.Server - INFO - skibiak used help
+2014-02-07 02:00:37,364 - skibiak.server.Room - INFO - Client skibiak left room: MainRoom
+2014-02-07 02:00:37,365 - skibiak.server.Server - INFO - User skibiak added room teens
+2014-02-07 02:01:31,590 - skibiak.server.Server - INFO - pitor used help
+2014-02-07 02:01:56,444 - skibiak.server.Server - INFO - User pitor added to room teens
+2014-02-07 02:01:56,444 - skibiak.server.Room - INFO - Client pitor left room: MainRoom
+2014-02-07 02:04:17,390 - skibiak.server.Server - INFO - Server is listening at port 4000
+2014-02-07 02:04:26,904 - skibiak.server.Server - INFO - Userpiotr has logged
+2014-02-07 02:04:26,904 - skibiak.server.Room - INFO - Client piotr entered room: MainRoom
+2014-02-07 02:04:29,476 - skibiak.server.Server - INFO - Userskibiak has logged
+2014-02-07 02:04:29,477 - skibiak.server.Room - INFO - Client skibiak entered room: MainRoom
+2014-02-07 02:05:09,712 - skibiak.server.Server - ERROR - Unknow option provided by skibiak
+2014-02-07 02:06:08,395 - skibiak.server.Server - INFO - Server is listening at port 4000
+2014-02-07 02:06:16,953 - skibiak.server.Server - INFO - Userpiotr has logged
+2014-02-07 02:06:16,954 - skibiak.server.Room - INFO - Client piotr entered room: MainRoom
+2014-02-07 02:06:19,168 - skibiak.server.Server - INFO - Useradam has logged
+2014-02-07 02:06:19,169 - skibiak.server.Room - INFO - Client adam entered room: MainRoom
+2014-02-07 02:06:28,626 - skibiak.server.Server - INFO - piotr used help
+2014-02-07 02:06:59,113 - skibiak.server.Room - INFO - Client piotr left room: MainRoom
+2014-02-07 02:06:59,113 - skibiak.server.Server - INFO - User piotr added room teens
+2014-02-07 02:07:53,547 - skibiak.server.Server - ERROR - Unknow option provided by adam
+2014-02-07 02:07:53,548 - skibiak.server.Server - WARN - User adam has selected a room that does not exist [null]
+2014-02-07 02:08:11,690 - skibiak.server.Room - INFO - Client adam left room: MainRoom
+2014-02-07 02:08:11,691 - skibiak.server.Server - INFO - User adam added to room teens
+2014-02-07 09:55:50,194 - skibiak.server.Server - INFO - Server is listening at port 4000
+2014-02-07 09:56:07,087 - skibiak.server.Server - INFO - UserBerta has logged
+2014-02-07 09:56:07,088 - skibiak.server.Room - INFO - Client Berta entered room: MainRoom
+2014-02-07 09:56:43,292 - skibiak.server.Server - ERROR - Unknow option provided by Berta
+2014-02-07 09:56:43,293 - skibiak.server.Server - WARN - User Berta has selected a room that does not exist [null]
+2014-02-07 10:34:35,304 - skibiak.server.Server - INFO - Server is listening at port 4000
+2014-02-07 10:34:45,441 - skibiak.server.Server - INFO - UserPeter has logged
+2014-02-07 10:34:45,441 - skibiak.server.Room - INFO - Client Peter entered room: MainRoom
+2014-02-07 10:34:48,673 - skibiak.server.Server - INFO - UserAnna has logged
+2014-02-07 10:34:48,674 - skibiak.server.Room - INFO - Client Anna entered room: MainRoom
+2014-02-07 10:35:05,751 - skibiak.server.Server - INFO - Command from user Anna parsed correctly
+2014-02-07 10:49:07,285 - skibiak.server.Server - INFO - Command from user Anna parsed correctly
+2014-02-07 10:49:07,285 - skibiak.server.Server - ERROR - Anna tried to add room of unrecognizable type [publicRoom]
+2014-02-07 10:49:21,528 - skibiak.server.Server - INFO - Command from user Anna parsed correctly
+2014-02-07 10:49:21,534 - skibiak.server.Room - INFO - Client Anna left room: MainRoom
+2014-02-07 10:49:21,534 - skibiak.server.Server - INFO - User Anna added room niceroom
+2014-02-07 10:49:27,553 - skibiak.server.Server - INFO - Command from user Anna parsed correctly
+2014-02-07 10:49:44,790 - skibiak.server.Server - INFO - Command from user Anna parsed correctly
+2014-02-07 10:51:40,587 - skibiak.server.Server - ERROR - Unknow option provided by Anna
