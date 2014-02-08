@@ -96,10 +96,16 @@ public class Server {
 		try {
 			PropertyConfigurator.configure("log4j.properties");
 			logger.setLevel(Level.INFO);
-
-			int port = 4000;
-			logger.info("Server is listening at port " + port);
-			new Server(port).runServer();
+			int port = Integer.parseInt(args[0]);
+			if (port > 1024 && port < 65535) {
+				logger.info("Server is listening at port " + port);
+				new Server(port).runServer();
+			} else {
+				logger.error("Uncorect port");
+			}
+		} catch (NumberFormatException e) {
+			logger.error("No port provided");
+			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {

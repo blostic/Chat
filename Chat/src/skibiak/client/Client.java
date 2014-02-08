@@ -6,7 +6,6 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.net.UnknownHostException;
-import java.util.Random;
 
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
@@ -25,8 +24,7 @@ public class Client implements Runnable {
 	private BufferedReader in;
 	private boolean active = true;
 
-	public Client(String nick, int port, String host) {
-		super();
+	public Client(int port, String host) {
 		this.port = port;
 		this.host = host;
 		PropertyConfigurator.configure("log4j.properties");
@@ -99,9 +97,16 @@ public class Client implements Runnable {
 		}
 	}
 
-	public static void main(String[] args) throws UnknownHostException,
-			IOException {
-		new Client("test" + new Random().nextInt(100), 4000, "localhost")
-				.startClient();
+	public static void main(String[] args) throws IOException {
+		try {
+			int port = Integer.parseInt(args[1]);
+			if (port > 1024 && port < 65535) {
+				logger.info("Server is listening at port " + port);
+			}
+			new Client(port, args[0]).startClient();
+		} catch (UnknownHostException e) {
+			e.printStackTrace();
+			logger.error(e);
+		}
 	}
 }

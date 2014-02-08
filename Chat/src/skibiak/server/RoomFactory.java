@@ -6,8 +6,8 @@ public class RoomFactory {
 		switch (type.toLowerCase()) {
 		case "public":
 			return new PublicRoom(server, name, topic, master);
-		case "censored":
-			return new CensoredRoom(server, name, topic, master);
+		case "private":
+			return new PrivateRoom(server, name, topic, master);
 		default:
 			throw new ClassNotFoundException();
 		}
