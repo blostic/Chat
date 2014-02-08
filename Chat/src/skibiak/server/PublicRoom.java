@@ -2,6 +2,8 @@ package skibiak.server;
 
 import java.io.IOException;
 
+import com.beust.jcommander.ParameterException;
+
 public class PublicRoom extends Room {
 	public PublicRoom(Server server, String roomName, String chatTopic,
 			String roomMaster) {
@@ -25,7 +27,7 @@ public class PublicRoom extends Room {
 
 	@Override
 	public void annouceMessage(String message) {
-		System.out.println("RECEIVER MESSAGE [room " + getRoomName() + "] "
+		System.out.println("MESSAGE [" + getRoomName() + "] "
 				+ message);
 		for (ClientConnectionAdapter connection : clients) {
 			connection.sendMessage(message);
@@ -38,9 +40,13 @@ public class PublicRoom extends Room {
 			if (connection.containMessage()) {
 				String message = connection.readMessage();
 				if (!message.startsWith("#")) {
-					annouceMessage(connection.getNickname() + ": " + message);
+					annouceMessage(" " + connection.getUsername() + ": " + message);
 				} else {
-					new ClientRequestHandler(server, connection).parseCommand(message);
+					try{
+						new ClientRequestHandler(server, connection).executeCommand(message);						
+					}catch(ParameterException e){
+						connection.sendMessage(">No such option, use #help to check correct syntax");
+					}
 				}
 		}
 		}

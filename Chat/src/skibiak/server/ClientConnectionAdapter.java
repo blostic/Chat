@@ -7,7 +7,7 @@ import java.io.PrintWriter;
 import java.net.Socket;
 
 public class ClientConnectionAdapter {
-	private String nickname;
+	private String username;
 	private Room presentRoom;
 	private PrintWriter out;
 	private BufferedReader in;
@@ -33,12 +33,12 @@ public class ClientConnectionAdapter {
 		}
 	}
 
-	public String getNickname() {
-		return nickname;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setNickname(String nickname) {
-		this.nickname = nickname;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public void sendMessage(String message) {

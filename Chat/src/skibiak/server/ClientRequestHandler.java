@@ -36,12 +36,12 @@ public class ClientRequestHandler {
 
 	}
 
-	private List<String> commandList = Arrays.asList("createRoom", "switchRoom",
-			"changeTopic", "showTopic", "showRooms", "showUsers", "help",
-			"exit");
+	private List<String> commandList = Arrays.asList("createRoom",
+			"switchRoom", "changeTopic", "showTopic", "showRooms", "showUsers",
+			"help", "exit");
 
-	private void displayHelp() {
-		client.sendMessage("#createRoom  [-n|-name] roomName [-T|-topic] roomTopic [-t|-type] roomType");
+	private void help() {
+		client.sendMessage("#createRoom  [-n|-name] roomName [-T|-topic] roomTopic [-t|-type] [public|censored]");
 		client.sendMessage("#switchRoom  [-n|-name] roomName");
 		client.sendMessage("#changeTopic [-T|-topic] roomTopic");
 		client.sendMessage("#showTopic");
@@ -49,7 +49,6 @@ public class ClientRequestHandler {
 		client.sendMessage("#showUsers");
 		client.sendMessage("#help");
 		client.sendMessage("#exit");
-		client.sendMessage("roomType = [public|censored]");
 	}
 
 	private void createRoom() {
@@ -57,22 +56,22 @@ public class ClientRequestHandler {
 			if (roomName.length() > 1 && roomType.length() > 1
 					&& roomTopic.length() > 1) {
 				Room room = RoomFactory.getInstance(server, roomName, roomType,
-						roomTopic, client.getNickname());
+						roomTopic, client.getUsername());
 				server.addRoomToServer(client, room);
 				client.setPresentRoom(room);
-				logger.info("User " + client.getNickname() + " added room "
+				logger.info(">" + client.getUsername() + " added room "
 						+ roomName);
 			} else {
-				logger.error(client.getNickname()
+				logger.error(client.getUsername()
 						+ " didn't provide all required parameters to create new room");
 				client.sendMessage("You should provide all required parameters");
 			}
 		} catch (ClassNotFoundException e) {
-			logger.error(client.getNickname()
+			logger.error(">" + client.getUsername()
 					+ " tried to add room of unrecognizable type [" + roomType
 					+ "]", e);
 			client.sendMessage("No such type of room");
-			
+
 		}
 	}
 
@@ -83,57 +82,56 @@ public class ClientRequestHandler {
 	private void changeTopic() {
 		client.getPresentRoom().setChatTopic(roomTopic);
 		client.getPresentRoom().annouceMessage(
-				client.getNickname() + " changed topic to: " + roomTopic);
-		logger.info(client.getNickname() + " changed topic to: " + roomTopic);
+				">" + client.getUsername() + " changed topic to: " + roomTopic);
+		logger.info(client.getUsername() + " changed topic to: " + roomTopic);
 	}
 
 	private void showTopic() {
-		client.sendMessage("Topic: " + client.getPresentRoom().getChatTopic());
+		client.sendMessage(">Topic: " + client.getPresentRoom().getChatTopic());
 	}
 
 	private void showUsers() {
-		client.sendMessage("Users in room " + client.getPresentRoom().getRoomName());
+		client.sendMessage(">Users in room "
+				+ client.getPresentRoom().getRoomName());
+		int counter = 1;
 		for (ClientConnectionAdapter connection : client.getPresentRoom().clients) {
-			client.sendMessage(connection.getNickname());
+			client.sendMessage(">" + counter + ".\t" + connection.getUsername());
+			counter++;
 		}
 	}
 
 	private void showRooms() {
 		for (Room room : server.getRooms().values()) {
-			client.sendMessage("Room name: " + room.getRoomName()
+			client.sendMessage(">Room name: " + room.getRoomName()
 					+ " | Topic: " + room.getChatTopic());
 		}
 	}
 
-	private void help() {
-		displayHelp();
-	}
-
 	private void exit() {
 		client.getPresentRoom().removeClient(client);
-		client.sendMessage("GoodBye!");
+		client.sendMessage(">GoodBye!");
 	}
 
-	public void parseCommand(String args) throws ParameterException {
-		String topic = args.replaceAll(".*\"(.+)\".*", "$1");
-		args = args.replaceAll("\"(.*)\"", "topic");
+	private void parseCommand(String args) throws ParameterException {
+		String topic = args.replaceAll(".*\"(.+)?\".*", "$1");
+		args = args.replaceAll("\"(.*)?\"", "topic");
 		String[] paramaters = args.split(" ");
 		command = paramaters[0].substring(1);
 		try {
 			new JCommander(this, Arrays.copyOfRange(paramaters, 1,
 					paramaters.length));
-			logger.info("Command from user " + client.getNickname()
+			logger.info("Command from user " + client.getUsername()
 					+ " parsed correctly");
 			roomTopic = topic;
+			System.out.println(this.command + " " +  this.roomName +" "+ roomTopic +" "+ roomType);
 		} catch (ParameterException e) {
-			logger.error("Unknow option provided by " + client.getNickname());
-			client.sendMessage("No such option, use #help to check correct syntax");
+			logger.error("Unknow option provided by " + client.getUsername());
 			throw new ParameterException(e);
 		}
-		executeCommand();
 	}
 
-	public void executeCommand() {
+	public void executeCommand(String clientMessage) throws ParameterException {		
+		parseCommand(clientMessage);
 		if (commandList.contains(command)) {
 			try {
 				Method method = ClientRequestHandler.class
@@ -145,7 +143,7 @@ public class ClientRequestHandler {
 				logger.error("Reflective invocation failed", e);
 			}
 		} else {
-			client.sendMessage("No such command, use #help to check correct syntax");
+			client.sendMessage(">No such command, use #help to check correct syntax");
 		}
 	}
 }

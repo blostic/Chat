@@ -34,15 +34,15 @@ public abstract class Room implements Runnable {
 	}
 
 	public void addClient(ClientConnectionAdapter client) {
-		logger.info("Client " + client.getNickname() + " entered room: "
+		logger.info("Client " + client.getUsername() + " entered room: "
 				+ this.roomName);
 		this.clients.add(client);
 	}
 
 	public void removeClient(ClientConnectionAdapter client) {
-		logger.info("Client " + client.getNickname() + " left room: "
+		logger.info("Client " + client.getUsername() + " left room: "
 				+ this.roomName);
-		this.clients.remove(client);
+		clients.remove(client);
 	}
 
 	public String getChatTopic() {

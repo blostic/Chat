@@ -78,7 +78,11 @@ public class Client implements Runnable {
 			try {
 				Thread.sleep(100);
 				String message = this.readServerMessages();
-				if (message != null && message != "") {
+				if (message != null) {
+					if (message.equals("GoodBye")) {
+						System.out.println("GoodBye");
+						return;
+					}
 					System.out.println(message);
 				}
 			} catch (InterruptedException e) {

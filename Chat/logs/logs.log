@@ -1,0 +1,241 @@
+2014-02-08 10:04:45,416 - skibiak.server.Server - INFO - Server is listening at port 4000
+2014-02-08 10:04:57,898 - skibiak.server.Server - INFO - UserBerta has logged
+2014-02-08 10:04:57,899 - skibiak.server.Room - INFO - Client Berta left room: MainRoom
+2014-02-08 10:04:57,900 - skibiak.server.Server - INFO - User Berta added to room MainRoom
+2014-02-08 10:05:10,241 - skibiak.server.Server - INFO - Command from user Berta parsed correctly
+2014-02-08 10:05:36,602 - skibiak.server.Server - INFO - Command from user Berta parsed correctly
+2014-02-08 10:05:42,845 - skibiak.server.Server - INFO - Useradam has logged
+2014-02-08 10:05:42,847 - skibiak.server.Room - INFO - Client adam left room: MainRoom
+2014-02-08 10:05:42,847 - skibiak.server.Server - INFO - User adam added to room MainRoom
+2014-02-08 10:05:50,742 - skibiak.server.Server - INFO - Command from user Berta parsed correctly
+2014-02-08 10:06:05,585 - skibiak.server.Server - INFO - Command from user Berta parsed correctly
+2014-02-08 10:06:37,965 - skibiak.server.Server - INFO - Command from user adam parsed correctly
+2014-02-08 10:08:07,433 - skibiak.server.Server - INFO - Server is listening at port 4000
+2014-02-08 10:08:22,511 - skibiak.server.Server - INFO - UserBartek has logged
+2014-02-08 10:08:22,512 - skibiak.server.Room - INFO - Client Bartek left room: MainRoom
+2014-02-08 10:08:22,513 - skibiak.server.Server - INFO - User Bartek added to room MainRoom
+2014-02-08 10:08:26,830 - skibiak.server.Server - INFO - UserAdamos has logged
+2014-02-08 10:08:26,840 - skibiak.server.Room - INFO - Client Adamos left room: MainRoom
+2014-02-08 10:08:26,841 - skibiak.server.Server - INFO - User Adamos added to room MainRoom
+2014-02-08 10:08:47,986 - skibiak.server.Server - INFO - Command from user Adamos parsed correctly
+2014-02-08 10:10:44,859 - skibiak.server.Server - INFO - Server is listening at port 4000
+2014-02-08 10:11:16,641 - skibiak.server.Server - INFO - Server is listening at port 4000
+2014-02-08 10:11:28,270 - skibiak.server.Server - INFO - UserBartomelo has logged
+2014-02-08 10:11:28,271 - skibiak.server.Room - INFO - Client Bartomelo left room: MainRoom
+2014-02-08 10:11:28,272 - skibiak.server.Server - INFO - User Bartomelo added to room MainRoom
+2014-02-08 10:12:15,245 - skibiak.server.Server - INFO - Server is listening at port 4000
+2014-02-08 10:12:24,727 - skibiak.server.Server - INFO - UserBartomelo has logged
+2014-02-08 10:12:24,729 - skibiak.server.Room - INFO - Client Bartomelo left room: MainRoom
+2014-02-08 10:12:24,729 - skibiak.server.Server - INFO - User Bartomelo added to room MainRoom
+2014-02-08 10:12:37,337 - skibiak.server.Server - INFO - UserAdamos has logged
+2014-02-08 10:12:37,352 - skibiak.server.Room - INFO - Client Adamos left room: MainRoom
+2014-02-08 10:12:37,353 - skibiak.server.Server - INFO - User Adamos added to room MainRoom
+2014-02-08 10:14:17,747 - skibiak.server.Server - INFO - Server is listening at port 4000
+2014-02-08 10:14:26,440 - skibiak.server.Server - INFO - UserBenek has logged
+2014-02-08 10:14:26,441 - skibiak.server.Room - INFO - Client Benek left room: MainRoom
+2014-02-08 10:14:26,441 - skibiak.server.Server - INFO - User Benek added to room MainRoom
+2014-02-08 10:14:31,337 - skibiak.server.Server - INFO - UserAdela has logged
+2014-02-08 10:14:31,343 - skibiak.server.Room - INFO - Client Adela left room: MainRoom
+2014-02-08 10:14:31,344 - skibiak.server.Server - INFO - User Adela added to room MainRoom
+2014-02-08 10:15:00,821 - skibiak.server.Server - INFO - Command from user Adela parsed correctly
+2014-02-08 10:15:09,851 - skibiak.server.Server - INFO - Command from user Adela parsed correctly
+2014-02-08 10:15:34,020 - skibiak.server.Server - INFO - Command from user Adela parsed correctly
+2014-02-08 10:15:34,020 - skibiak.server.Server - INFO - Adela changed topic to: Jak to mozliwe ze nic nie dziala w dzisiejszym swiecie
+2014-02-08 10:15:48,663 - skibiak.server.Server - INFO - Command from user Adela parsed correctly
+2014-02-08 10:16:33,569 - skibiak.server.Server - INFO - Command from user Adela parsed correctly
+2014-02-08 10:16:33,572 - skibiak.server.Server - ERROR - Reflective invocation failed
+java.lang.reflect.InvocationTargetException
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at skibiak.server.ClientRequestHandler.executeCommand(ClientRequestHandler.java:143)
+	at skibiak.server.ClientRequestHandler.parseCommand(ClientRequestHandler.java:135)
+	at skibiak.server.PublicRoom.readMessages(PublicRoom.java:43)
+	at skibiak.server.PublicRoom.run(PublicRoom.java:17)
+	at java.lang.Thread.run(Thread.java:744)
+Caused by: java.lang.NullPointerException
+	at skibiak.server.ClientRequestHandler.createRoom(ClientRequestHandler.java:56)
+	... 9 more
+2014-02-08 10:20:50,760 - skibiak.server.Server - INFO - Server is listening at port 4000
+2014-02-08 10:21:04,570 - skibiak.server.Server - INFO - UserAdela has logged
+2014-02-08 10:21:04,571 - skibiak.server.Room - INFO - Client Adela left room: MainRoom
+2014-02-08 10:21:04,572 - skibiak.server.Server - INFO - User Adela added to room MainRoom
+2014-02-08 10:21:12,381 - skibiak.server.Server - INFO - Command from user Adela parsed correctly
+2014-02-08 10:21:12,385 - skibiak.server.Server - ERROR - Reflective invocation failed
+java.lang.reflect.InvocationTargetException
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at skibiak.server.ClientRequestHandler.executeCommand(ClientRequestHandler.java:144)
+	at skibiak.server.ClientRequestHandler.parseCommand(ClientRequestHandler.java:136)
+	at skibiak.server.PublicRoom.readMessages(PublicRoom.java:43)
+	at skibiak.server.PublicRoom.run(PublicRoom.java:17)
+	at java.lang.Thread.run(Thread.java:744)
+Caused by: java.lang.NullPointerException
+	at skibiak.server.ClientRequestHandler.createRoom(ClientRequestHandler.java:56)
+	... 9 more
+2014-02-08 10:21:54,302 - skibiak.server.Server - INFO - Server is listening at port 4000
+2014-02-08 10:22:01,525 - skibiak.server.Server - INFO - Useradas has logged
+2014-02-08 10:22:01,526 - skibiak.server.Room - INFO - Client adas left room: MainRoom
+2014-02-08 10:22:01,527 - skibiak.server.Server - INFO - User adas added to room MainRoom
+2014-02-08 10:22:22,935 - skibiak.server.Server - INFO - Command from user adas parsed correctly
+2014-02-08 10:22:22,942 - skibiak.server.Room - INFO - Client adas left room: MainRoom
+2014-02-08 10:22:22,942 - skibiak.server.Server - INFO - >adas added room Teens
+2014-02-08 10:40:49,706 - skibiak.server.Server - INFO - Server is listening at port 4000
+2014-02-08 10:41:01,183 - skibiak.server.Server - INFO - Usertesttt has logged
+2014-02-08 10:41:01,187 - skibiak.server.Room - INFO - Client testtt left room: MainRoom
+2014-02-08 10:41:01,188 - skibiak.server.Server - INFO - User testtt added to room MainRoom
+2014-02-08 10:41:06,912 - skibiak.server.Server - INFO - Command from user testtt parsed correctly
+2014-02-08 10:41:06,919 - skibiak.server.Room - INFO - Client testtt left room: MainRoom
+2014-02-08 10:41:06,919 - skibiak.server.Server - INFO - >testtt added room Teens
+2014-02-08 10:41:18,851 - skibiak.server.Server - INFO - Command from user testtt parsed correctly
+2014-02-08 10:41:18,852 - skibiak.server.Server - ERROR - Reflective invocation failed
+java.lang.reflect.InvocationTargetException
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at skibiak.server.ClientRequestHandler.executeCommand(ClientRequestHandler.java:144)
+	at skibiak.server.PublicRoom.readMessages(PublicRoom.java:43)
+	at skibiak.server.PublicRoom.run(PublicRoom.java:17)
+	at java.lang.Thread.run(Thread.java:744)
+Caused by: java.lang.NullPointerException
+	at skibiak.server.ClientRequestHandler.createRoom(ClientRequestHandler.java:56)
+	... 8 more
+2014-02-08 10:41:56,164 - skibiak.server.Server - INFO - Server is listening at port 4000
+2014-02-08 10:42:03,114 - skibiak.server.Server - INFO - Usersdfsdf has logged
+2014-02-08 10:42:03,115 - skibiak.server.Room - INFO - Client sdfsdf left room: MainRoom
+2014-02-08 10:42:03,116 - skibiak.server.Server - INFO - User sdfsdf added to room MainRoom
+2014-02-08 10:42:08,273 - skibiak.server.Server - INFO - Command from user sdfsdf parsed correctly
+2014-02-08 10:42:08,279 - skibiak.server.Room - INFO - Client sdfsdf left room: MainRoom
+2014-02-08 10:42:08,280 - skibiak.server.Server - INFO - >sdfsdf added room Teens
+2014-02-08 10:42:12,898 - skibiak.server.Server - INFO - Command from user sdfsdf parsed correctly
+2014-02-08 10:42:12,899 - skibiak.server.Server - ERROR - Reflective invocation failed
+java.lang.reflect.InvocationTargetException
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at skibiak.server.ClientRequestHandler.executeCommand(ClientRequestHandler.java:144)
+	at skibiak.server.PublicRoom.readMessages(PublicRoom.java:43)
+	at skibiak.server.PublicRoom.run(PublicRoom.java:17)
+	at java.lang.Thread.run(Thread.java:744)
+Caused by: java.lang.NullPointerException
+	at skibiak.server.ClientRequestHandler.createRoom(ClientRequestHandler.java:56)
+	... 8 more
+2014-02-08 10:53:07,081 - skibiak.server.Server - INFO - Server is listening at port 4000
+2014-02-08 10:53:18,187 - skibiak.server.Server - INFO - Userasdd has logged
+2014-02-08 10:53:18,188 - skibiak.server.Room - INFO - Client asdd left room: MainRoom
+2014-02-08 10:53:18,189 - skibiak.server.Server - INFO - User asdd added to room MainRoom
+2014-02-08 10:53:33,514 - skibiak.server.Server - ERROR - Unknow option provided by asdd
+2014-02-08 10:57:56,787 - skibiak.server.Server - INFO - Server is listening at port 4000
+2014-02-08 10:58:07,879 - skibiak.server.Server - INFO - Userberta has logged
+2014-02-08 10:58:07,880 - skibiak.server.Room - INFO - Client berta left room: MainRoom
+2014-02-08 10:58:07,880 - skibiak.server.Server - INFO - User berta added to room MainRoom
+2014-02-08 10:58:40,748 - skibiak.server.Server - INFO - Server is listening at port 4000
+2014-02-08 10:58:49,060 - skibiak.server.Server - INFO - UserBerta has logged
+2014-02-08 10:58:49,061 - skibiak.server.Room - INFO - Client Berta left room: MainRoom
+2014-02-08 10:58:49,062 - skibiak.server.Server - INFO - User Berta added to room MainRoom
+2014-02-08 11:01:30,600 - skibiak.server.Server - INFO - Server is listening at port 4000
+2014-02-08 11:01:41,171 - skibiak.server.Server - INFO - Userhelp has logged
+2014-02-08 11:01:41,173 - skibiak.server.Room - INFO - Client help left room: MainRoom
+2014-02-08 11:01:41,174 - skibiak.server.Server - INFO - User help added to room MainRoom
+2014-02-08 11:01:44,211 - skibiak.server.Server - INFO - Command from user help parsed correctly
+2014-02-08 11:02:25,418 - skibiak.server.Server - INFO - Command from user help parsed correctly
+2014-02-08 11:02:25,421 - skibiak.server.Room - INFO - Client help left room: MainRoom
+2014-02-08 11:02:25,422 - skibiak.server.Server - INFO - >help added room topic
+2014-02-08 11:02:30,340 - skibiak.server.Server - INFO - Command from user help parsed correctly
+2014-02-08 11:02:51,693 - skibiak.server.Server - INFO - Command from user help parsed correctly
+2014-02-08 11:02:51,694 - skibiak.server.Room - INFO - Client help left room: topic
+2014-02-08 11:06:11,572 - skibiak.server.Server - INFO - Server is listening at port 4000
+2014-02-08 11:07:26,008 - skibiak.server.Server - INFO - Server is listening at port 4000
+2014-02-08 11:07:37,697 - skibiak.server.Server - INFO - Usertest has logged
+2014-02-08 11:07:37,697 - skibiak.server.Room - INFO - Client test left room: MainRoom
+2014-02-08 11:07:37,698 - skibiak.server.Server - INFO - User test added to room MainRoom
+2014-02-08 11:07:41,466 - skibiak.server.Server - INFO - Usertest2 has logged
+2014-02-08 11:07:41,474 - skibiak.server.Room - INFO - Client test2 left room: MainRoom
+2014-02-08 11:07:41,474 - skibiak.server.Server - INFO - User test2 added to room MainRoom
+2014-02-08 11:07:47,529 - skibiak.server.Server - INFO - Command from user test parsed correctly
+2014-02-08 11:08:11,690 - skibiak.server.Server - INFO - Command from user test parsed correctly
+2014-02-08 11:08:14,807 - skibiak.server.Server - INFO - Command from user test parsed correctly
+2014-02-08 11:08:26,845 - skibiak.server.Server - INFO - Command from user test2 parsed correctly
+2014-02-08 11:08:35,339 - skibiak.server.Server - INFO - Server is listening at port 4000
+2014-02-08 11:08:44,154 - skibiak.server.Server - INFO - Usertest has logged
+2014-02-08 11:08:44,154 - skibiak.server.Room - INFO - Client test left room: MainRoom
+2014-02-08 11:08:44,155 - skibiak.server.Server - INFO - User test added to room MainRoom
+2014-02-08 11:08:46,435 - skibiak.server.Server - INFO - Command from user test parsed correctly
+2014-02-08 11:15:48,012 - skibiak.server.Server - INFO - Server is listening at port 4000
+2014-02-08 11:15:58,791 - skibiak.server.Server - INFO - UserAlehandor has logged
+2014-02-08 11:15:58,792 - skibiak.server.Room - INFO - Client Alehandor left room: MainRoom
+2014-02-08 11:15:58,794 - skibiak.server.Server - INFO - User Alehandor added to room MainRoom
+2014-02-08 11:16:02,372 - skibiak.server.Server - INFO - UserAdela has logged
+2014-02-08 11:16:02,384 - skibiak.server.Room - INFO - Client Adela left room: MainRoom
+2014-02-08 11:16:02,385 - skibiak.server.Server - INFO - User Adela added to room MainRoom
+2014-02-08 11:16:33,299 - skibiak.server.Server - INFO - Command from user Alehandor parsed correctly
+2014-02-08 11:17:49,072 - skibiak.server.Server - INFO - Server is listening at port 4000
+2014-02-08 11:18:00,543 - skibiak.server.Server - INFO - UserAdsd has logged
+2014-02-08 11:18:00,545 - skibiak.server.Room - INFO - Client Adsd left room: MainRoom
+2014-02-08 11:18:00,546 - skibiak.server.Server - INFO - User Adsd added to room MainRoom
+2014-02-08 11:18:04,436 - skibiak.server.Server - INFO - Userbbooom has logged
+2014-02-08 11:18:04,443 - skibiak.server.Room - INFO - Client bbooom left room: MainRoom
+2014-02-08 11:18:04,444 - skibiak.server.Server - INFO - User bbooom added to room MainRoom
+2014-02-08 12:03:02,366 - skibiak.server.Server - INFO - Server is listening at port 4000
+2014-02-08 12:04:24,074 - skibiak.server.Server - INFO - Userasd has logged
+2014-02-08 12:04:24,075 - skibiak.server.Room - INFO - Client asd left room: MainRoom
+2014-02-08 12:04:24,075 - skibiak.server.Server - INFO - User asd added to room MainRoom
+2014-02-08 12:05:33,381 - skibiak.server.Server - INFO - Server is listening at port 4000
+2014-02-08 12:05:43,588 - skibiak.server.Server - INFO - UserAdam has logged
+2014-02-08 12:05:43,591 - skibiak.server.Room - INFO - Client Adam left room: MainRoom
+2014-02-08 12:05:43,591 - skibiak.server.Server - INFO - User Adam added to room MainRoom
+2014-02-08 12:05:51,883 - skibiak.server.Server - INFO - Useras has logged
+2014-02-08 12:05:51,885 - skibiak.server.Room - INFO - Client as left room: MainRoom
+2014-02-08 12:05:51,886 - skibiak.server.Server - INFO - User as added to room MainRoom
+2014-02-08 12:06:12,985 - skibiak.server.Server - INFO - Usera has logged
+2014-02-08 12:06:12,986 - skibiak.server.Room - INFO - Client a left room: MainRoom
+2014-02-08 12:06:12,986 - skibiak.server.Server - INFO - User a added to room MainRoom
+2014-02-08 12:06:39,736 - skibiak.server.Server - INFO - User!@@#asdasdas has logged
+2014-02-08 12:06:39,738 - skibiak.server.Room - INFO - Client !@@#asdasdas left room: MainRoom
+2014-02-08 12:06:39,738 - skibiak.server.Server - INFO - User !@@#asdasdas added to room MainRoom
+2014-02-08 12:08:06,678 - skibiak.server.Server - INFO - User has logged
+2014-02-08 12:08:06,680 - skibiak.server.Room - INFO - Client  left room: MainRoom
+2014-02-08 12:08:06,681 - skibiak.server.Server - INFO - User  added to room MainRoom
+2014-02-08 12:08:32,317 - skibiak.server.Server - INFO - Server is listening at port 4000
+2014-02-08 12:08:38,198 - skibiak.server.Server - INFO - Usera has logged
+2014-02-08 12:08:38,199 - skibiak.server.Room - INFO - Client a left room: MainRoom
+2014-02-08 12:08:38,200 - skibiak.server.Server - INFO - User a added to room MainRoom
+2014-02-08 12:09:25,098 - skibiak.server.Server - INFO - Server is listening at port 4000
+2014-02-08 12:09:41,435 - skibiak.server.Server - INFO - Userbor has logged
+2014-02-08 12:09:41,436 - skibiak.server.Room - INFO - Client bor left room: MainRoom
+2014-02-08 12:09:41,436 - skibiak.server.Server - INFO - User bor added to room MainRoom
+2014-02-08 12:10:56,568 - skibiak.server.Server - INFO - Server is listening at port 4000
+2014-02-08 12:12:47,395 - skibiak.server.Server - INFO - Server is listening at port 4000
+2014-02-08 12:13:55,501 - skibiak.server.Server - INFO - Userasdasdasd has logged
+2014-02-08 12:13:55,502 - skibiak.server.Room - INFO - Client asdasdasd left room: MainRoom
+2014-02-08 12:13:55,503 - skibiak.server.Server - INFO - User asdasdasd added to room MainRoom
+2014-02-08 12:14:03,236 - skibiak.server.Server - INFO - Usersprawdzian has logged
+2014-02-08 12:14:03,237 - skibiak.server.Room - INFO - Client sprawdzian left room: MainRoom
+2014-02-08 12:14:03,238 - skibiak.server.Server - INFO - User sprawdzian added to room MainRoom
+2014-02-08 12:14:25,162 - skibiak.server.Server - INFO - Usertest1 has logged
+2014-02-08 12:14:25,164 - skibiak.server.Room - INFO - Client test1 left room: MainRoom
+2014-02-08 12:14:25,164 - skibiak.server.Server - INFO - User test1 added to room MainRoom
+2014-02-08 12:14:39,446 - skibiak.server.Server - INFO - Usertest has logged
+2014-02-08 12:14:39,449 - skibiak.server.Room - INFO - Client test left room: MainRoom
+2014-02-08 12:14:39,449 - skibiak.server.Server - INFO - User test added to room MainRoom
+2014-02-08 12:15:09,843 - skibiak.server.Server - INFO - Command from user sprawdzian parsed correctly
+2014-02-08 12:15:16,268 - skibiak.server.Server - INFO - Command from user sprawdzian parsed correctly
+2014-02-08 12:15:22,765 - skibiak.server.Server - INFO - Usertessss has logged
+2014-02-08 12:15:22,776 - skibiak.server.Room - INFO - Client tessss left room: MainRoom
+2014-02-08 12:15:22,776 - skibiak.server.Server - INFO - User tessss added to room MainRoom
+2014-02-08 12:17:05,517 - skibiak.server.Server - INFO - Server is listening at port 4000
+2014-02-08 12:17:22,660 - skibiak.server.Server - INFO - Usertest has logged
+2014-02-08 12:17:22,661 - skibiak.server.Room - INFO - Client test left room: MainRoom
+2014-02-08 12:17:22,662 - skibiak.server.Server - INFO - User test added to room MainRoom
+2014-02-08 12:18:18,193 - skibiak.server.Server - INFO - Server is listening at port 4000
+2014-02-08 12:18:34,306 - skibiak.server.Server - INFO - UserBoo has logged
+2014-02-08 12:18:34,307 - skibiak.server.Room - INFO - Client Boo left room: MainRoom
+2014-02-08 12:18:34,308 - skibiak.server.Server - INFO - User Boo added to room MainRoom
+2014-02-08 12:18:59,407 - skibiak.server.Server - INFO - UserBooo has logged
+2014-02-08 12:18:59,408 - skibiak.server.Room - INFO - Client Booo left room: MainRoom
+2014-02-08 12:18:59,409 - skibiak.server.Server - INFO - User Booo added to room MainRoom

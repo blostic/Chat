@@ -8,6 +8,8 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
@@ -33,7 +35,8 @@ public class Server {
 		try (ServerSocket socket = new ServerSocket(port)) {
 			while (true) {
 				Socket clientSocket = socket.accept();
-				new Thread(new LogUser(clientSocket)).start();;
+				new Thread(new LogUser(clientSocket)).start();
+				;
 			}
 		}
 	}
@@ -44,17 +47,17 @@ public class Server {
 			rooms.put(room.getRoomName(), room);
 			client.sendMessage("Created room " + roomName);
 		} else {
-			logger.warn("User " + client.getNickname()
+			logger.warn("User " + client.getUsername()
 					+ " tried to add room which already exist [" + roomName
 					+ "]");
 			client.sendMessage("Room already exist");
 		}
 	}
 
-	public boolean containUser(String nickname) {
+	public boolean containUser(String username) {
 		for (Room room : rooms.values()) {
 			for (ClientConnectionAdapter clientConnection : room.clients) {
-				if (clientConnection.getNickname().equals(nickname)) {
+				if (clientConnection.getUsername().equals(username)) {
 					return true;
 				}
 			}
@@ -65,11 +68,13 @@ public class Server {
 	public void addUserToRoom(ClientConnectionAdapter client, String roomName) {
 		if (rooms.containsKey(roomName)) {
 			Room room = rooms.get(roomName);
+			room.annouceMessage(">User " + client.getUsername()
+					+ " entered the room");
 			client.setPresentRoom(room);
-			logger.info("User " + client.getNickname() + " added to room "
+			logger.info("User " + client.getUsername() + " added to room "
 					+ roomName);
 		} else {
-			logger.warn("User " + client.getNickname()
+			logger.warn("User " + client.getUsername()
 					+ " has selected a room that does not exist [" + roomName
 					+ "]");
 			client.sendMessage("Room doesn't exist");
@@ -87,7 +92,7 @@ public class Server {
 			room.clients.removeAll(clientsToRemove);
 		}
 	}
-	
+
 	public static void main(String[] args) {
 		try {
 			PropertyConfigurator.configure("log4j.properties");
@@ -103,46 +108,58 @@ public class Server {
 		}
 	}
 
-	private class LogUser implements Runnable{
-		private Socket clientSocket;
+	private class LogUser implements Runnable {
+		private final ClientConnectionAdapter client;
+
+		private static final String USERNAME_PATTERN = "^[a-z0-9_-]{3,15}$";
+		private final Pattern pattern = Pattern.compile(USERNAME_PATTERN,
+				Pattern.CASE_INSENSITIVE);
 
 		private LogUser(Socket clientSocket) {
-			this.clientSocket = clientSocket;
+			this.client = new ClientConnectionAdapter(clientSocket,
+					rooms.get("MainRoom"));
+		}
+
+		private boolean validUsername(String username) {
+			Matcher matcher = pattern.matcher(username);
+			return matcher.matches();
+		}
+
+		private boolean syncUserLogin(String username) {
+			if (!containUser(username)) {
+				synchronized (rooms.get("MainRoom")) {
+					if (!containUser(username)) {
+						client.setUsername(username);
+						client.sendMessage("Welcome " + username + "!");
+						logger.info("User" + username + " has logged");
+						addUserToRoom(client, "MainRoom");
+						return true;
+					}
+				}
+			}
+			return false;
 		}
 
 		@Override
 		public void run() {
-			ClientConnectionAdapter client = new ClientConnectionAdapter(
-					clientSocket, rooms.get("MainRoom"));
-			Boolean nickFree = false;
-			client.sendMessage("Please choose a nickname: ");
-			String nickname = "";
+			Boolean userFree = false;
+			client.sendMessage("Please choose a username: ");
 			try {
-				while (!nickFree) {
-					nickname = client.readMessage();
-					if (nickname.length() > 3) {
-						nickFree = !containUser(nickname);
-					} else {
-						nickFree = false;
-						client.sendMessage("Nickname must have at least 4 letters");
-					}
-					if (nickFree) {
-						synchronized (rooms.get("MainRoom")) {
-							if (!containUser(nickname)) {
-								client.setNickname(nickname);
-								client.sendMessage("Welcome " + nickname + "!");
-								logger.info("User" + nickname + " has logged");
-								addUserToRoom(client, "MainRoom");
-							}
+				while (!userFree) {
+					String username = client.readMessage();
+					if (validUsername(username)) {
+						userFree = syncUserLogin(username);
+						if (!userFree) {
+							client.sendMessage("Username " + username
+									+ " is already in use. Try something else.");
 						}
 					} else {
-						client.sendMessage("Nickname " + nickname
-								+ " is already in use. Try something else.");
+						client.sendMessage("Valid login consists of 3 to 15 alphanumeric (plus _-) symbols");
 					}
 				}
 			} catch (IOException e) {
 				e.printStackTrace();
-				logger.error("User left the chat before choosing nickname");
+				logger.error("User left the chat before choosing username");
 			}
 		}
 	}
