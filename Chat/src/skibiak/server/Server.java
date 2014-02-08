@@ -36,7 +36,6 @@ public class Server {
 			while (true) {
 				Socket clientSocket = socket.accept();
 				new Thread(new LogUser(clientSocket)).start();
-				;
 			}
 		}
 	}

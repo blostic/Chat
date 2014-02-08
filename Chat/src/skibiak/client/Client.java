@@ -15,12 +15,15 @@ import org.apache.log4j.PropertyConfigurator;
 import skibiak.server.Room;
 
 public class Client implements Runnable {
-	private static Logger logger = Logger.getLogger(Room.class);
-	private int port;
-	private String host;
+	private final static Logger logger = Logger.getLogger(Room.class);
+	private final int port;
+	private final String host;
+	private String nickname;
+	
 	private BufferedReader scanner;
 	private PrintWriter out;
 	private BufferedReader in;
+	private boolean active = true;
 
 	public Client(String nick, int port, String host) {
 		super();
@@ -41,13 +44,17 @@ public class Client implements Runnable {
 	}
 
 	public String readServerMessages() throws IOException {
-		return in.readLine();
+		try {
+			return in.readLine();
+		} catch (IOException e) {
+			logger.info("connection close");
+			return "Connection Closed";
+		}
 	}
 
 	public void login() throws IOException {
 		System.out.println(readServerMessages());
 		boolean nickCorrect = false;
-		String nickname = "";
 		while (!nickCorrect) {
 			nickname = scanner.readLine();
 			sendClientMessage(nickname);
@@ -65,8 +72,11 @@ public class Client implements Runnable {
 					socket.getInputStream()));
 			login();
 			new Thread(this).start();
-			while (true) {
+			while (active) {
 				String message = scanner.readLine();
+				if (message.equals("#exit")){					
+					active = false;
+				}
 				sendClientMessage(message);
 			}
 		}
@@ -74,15 +84,11 @@ public class Client implements Runnable {
 
 	@Override
 	public void run() {
-		while (true) {
+		while (active) {
 			try {
 				Thread.sleep(100);
 				String message = this.readServerMessages();
 				if (message != null) {
-					if (message.equals("GoodBye")) {
-						System.out.println("GoodBye");
-						return;
-					}
 					System.out.println(message);
 				}
 			} catch (InterruptedException e) {

@@ -4,6 +4,8 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
@@ -20,13 +22,13 @@ public class ClientRequestHandler {
 	private Server server;
 
 	@Parameter(names = { "-n", "-name" }, description = "Name of room to switch / to create")
-	private String roomName;
+	private String roomName = "";
 
 	@Parameter(names = { "-t", "-type" }, description = "Type of created room")
-	private String roomType;
+	private String roomType = "";
 
 	@Parameter(names = { "-T", "-topic" }, description = "Topic of created room")
-	private String roomTopic;
+	private String roomTopic = "";
 
 	public ClientRequestHandler(Server server, ClientConnectionAdapter client) {
 		PropertyConfigurator.configure("log4j.properties");
@@ -41,9 +43,9 @@ public class ClientRequestHandler {
 			"help", "exit");
 
 	private void help() {
-		client.sendMessage("#createRoom  [-n|-name] roomName [-T|-topic] roomTopic [-t|-type] [public|censored]");
-		client.sendMessage("#switchRoom  [-n|-name] roomName");
-		client.sendMessage("#changeTopic [-T|-topic] roomTopic");
+		client.sendMessage("#createRoom  -name roomName -topic roomTopic -type [public|censored]");
+		client.sendMessage("#switchRoom  -name roomName");
+		client.sendMessage("#changeTopic -topic roomTopic");
 		client.sendMessage("#showTopic");
 		client.sendMessage("#showRooms");
 		client.sendMessage("#showUsers");
@@ -112,9 +114,23 @@ public class ClientRequestHandler {
 		client.sendMessage(">GoodBye!");
 	}
 
+	String replaceQuotation(String options) {
+		String regex = "\".*?\"";
+		Pattern p = Pattern.compile(regex);
+		Matcher m = p.matcher(options);
+		StringBuffer sb = new StringBuffer();
+
+		while (m.find()) {
+			String replacement = m.group().replace(" ", "#");
+			m.appendReplacement(sb, replacement);
+		}
+		m.appendTail(sb);
+		return sb.toString();
+	}
+
 	private void parseCommand(String args) throws ParameterException {
-		String topic = args.replaceAll(".*\"(.+)?\".*", "$1");
-		args = args.replaceAll("\"(.*)?\"", "topic");
+		args = replaceQuotation(args);
+
 		String[] paramaters = args.split(" ");
 		command = paramaters[0].substring(1);
 		try {
@@ -122,15 +138,17 @@ public class ClientRequestHandler {
 					paramaters.length));
 			logger.info("Command from user " + client.getUsername()
 					+ " parsed correctly");
-			roomTopic = topic;
-			System.out.println(this.command + " " +  this.roomName +" "+ roomTopic +" "+ roomType);
+			roomName = roomName.replace("#", " ");
+			roomTopic = roomTopic.replace("#", " ");
+			System.out.println(this.command + " " + this.roomName + " "
+					+ roomTopic + " " + roomType);
 		} catch (ParameterException e) {
 			logger.error("Unknow option provided by " + client.getUsername());
 			throw new ParameterException(e);
 		}
 	}
 
-	public void executeCommand(String clientMessage) throws ParameterException {		
+	public void executeCommand(String clientMessage) throws ParameterException {
 		parseCommand(clientMessage);
 		if (commandList.contains(command)) {
 			try {
