@@ -36,7 +36,7 @@ public class ClientRequestHandler {
 
 	}
 
-	private List<String> commandList = Arrays.asList("creteRoom", "switchRoom",
+	private List<String> commandList = Arrays.asList("createRoom", "switchRoom",
 			"changeTopic", "showTopic", "showRooms", "showUsers", "help",
 			"exit");
 
@@ -88,11 +88,11 @@ public class ClientRequestHandler {
 	}
 
 	private void showTopic() {
-		client.sendMessage("Ropic: " + client.getPresentRoom().getChatTopic());
+		client.sendMessage("Topic: " + client.getPresentRoom().getChatTopic());
 	}
 
 	private void showUsers() {
-		client.sendMessage("Users in room " + roomName);
+		client.sendMessage("Users in room " + client.getPresentRoom().getRoomName());
 		for (ClientConnectionAdapter connection : client.getPresentRoom().clients) {
 			client.sendMessage(connection.getNickname());
 		}

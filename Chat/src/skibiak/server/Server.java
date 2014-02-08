@@ -33,7 +33,7 @@ public class Server {
 		try (ServerSocket socket = new ServerSocket(port)) {
 			while (true) {
 				Socket clientSocket = socket.accept();
-				new EstablishUser(clientSocket);
+				new Thread(new LogUser(clientSocket)).start();;
 			}
 		}
 	}
@@ -103,12 +103,11 @@ public class Server {
 		}
 	}
 
-	private class EstablishUser extends Thread {
+	private class LogUser implements Runnable{
 		private Socket clientSocket;
 
-		private EstablishUser(Socket clientSocket) {
+		private LogUser(Socket clientSocket) {
 			this.clientSocket = clientSocket;
-			this.start();
 		}
 
 		@Override
@@ -133,7 +132,7 @@ public class Server {
 								client.setNickname(nickname);
 								client.sendMessage("Welcome " + nickname + "!");
 								logger.info("User" + nickname + " has logged");
-								rooms.get("MainRoom").addClient(client);
+								addUserToRoom(client, "MainRoom");
 							}
 						}
 					} else {

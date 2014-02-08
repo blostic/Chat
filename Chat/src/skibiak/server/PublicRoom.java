@@ -2,8 +2,6 @@ package skibiak.server;
 
 import java.io.IOException;
 
-import com.beust.jcommander.ParameterException;
-
 public class PublicRoom extends Room {
 	public PublicRoom(Server server, String roomName, String chatTopic,
 			String roomMaster) {
