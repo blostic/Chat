@@ -40,15 +40,16 @@ public class PublicRoom extends Room {
 			if (connection.containMessage()) {
 				String message = connection.readMessage();
 				if (!message.startsWith("#")) {
-					annouceMessage(" " + connection.getUsername() + ": " + message);
+					annouceMessage(connection.getUsername() + ": "+ message);
 				} else {
-					try{
-						new ClientRequestHandler(server, connection).executeCommand(message);						
-					}catch(ParameterException e){
+					try {
+						new ClientRequestHandler(server, connection)
+								.executeCommand(message);
+					} catch (ParameterException e) {
 						connection.sendMessage(">No such option, use #help to check correct syntax");
 					}
 				}
-		}
+			}
 		}
 	}
 

@@ -43,7 +43,7 @@ public class ClientRequestHandler {
 			"help", "exit");
 
 	private void help() {
-		client.sendMessage("#createRoom  -name roomName -topic roomTopic -type [public|private]");
+		client.sendMessage("#createRoom  -name roomName -topic roomTopic -type [public|censored]");
 		client.sendMessage("#switchRoom  -name roomName");
 		client.sendMessage("#changeTopic -topic roomTopic");
 		client.sendMessage("#showTopic");
