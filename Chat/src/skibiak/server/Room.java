@@ -1,6 +1,7 @@
 package skibiak.server;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -17,7 +18,7 @@ public abstract class Room implements Runnable {
 	
 	protected final List<ClientConnectionAdapter> clients;
 	protected final Server server;
-
+	
 	public Room(Server server, String roomName, String chatTopic, String roomMaster) {
 		this.chatTopic = chatTopic;
 		this.clients = new CopyOnWriteArrayList<ClientConnectionAdapter>();
@@ -29,10 +30,36 @@ public abstract class Room implements Runnable {
 		logger.setLevel(Level.INFO);
 	}
 
-	public void startRoom() {
-		new Thread(this).start();
+	public List<ClientConnectionAdapter> getClients() {
+		return clients;
 	}
 
+	public void startRoom() {
+		new Thread(this).start();
+		new Runnable() {
+			
+			@Override
+			public void run() {
+				while(server.isActive()){
+					removeUnresponsiveClients();
+				}
+			}
+		};
+		
+	}
+
+	public void removeUnresponsiveClients() {
+		List<ClientConnectionAdapter> clientsToRemove = new ArrayList<ClientConnectionAdapter>();
+		for (ClientConnectionAdapter clientConnection : clients) {
+			if (clientConnection.clientDisconected()) {
+				clientsToRemove.add(clientConnection);
+			}
+		}
+		for (ClientConnectionAdapter  client: clientsToRemove){
+			removeClient(client);
+		}
+	}
+	
 	public void addClient(ClientConnectionAdapter client) {
 		logger.info("Client " + client.getUsername() + " entered room: "
 				+ this.roomName);

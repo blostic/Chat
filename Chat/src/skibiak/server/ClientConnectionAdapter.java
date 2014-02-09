@@ -19,7 +19,6 @@ public class ClientConnectionAdapter {
 	public void setPresentRoom(Room presentRoom) {
 		this.presentRoom.removeClient(this);
 		this.presentRoom = presentRoom;
-		presentRoom.clients.add(this);
 	}
 
 	public ClientConnectionAdapter(Socket socket, Room presetRoom) {

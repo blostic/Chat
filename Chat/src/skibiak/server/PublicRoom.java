@@ -13,7 +13,7 @@ public class PublicRoom extends Room {
 
 	@Override
 	public void run() {
-		while (true) {
+		while (server.isActive()) {
 			try {
 				Thread.sleep(100);
 				this.readMessages();

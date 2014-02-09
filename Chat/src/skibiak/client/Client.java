@@ -19,7 +19,7 @@ public class Client implements Runnable {
 	private final String host;
 	private String nickname;
 	
-	private BufferedReader scanner;
+	private BufferedReader reader;
 	private PrintWriter out;
 	private BufferedReader in;
 	private boolean active = true;
@@ -44,8 +44,11 @@ public class Client implements Runnable {
 	public String readServerMessages() throws IOException {
 		try {
 			
-			String s =  in.readLine();
-			return InputProcessing.processInput(s, this.nickname);
+			String message = in.readLine();
+			if (message != null && message.equals(">GoodBye!")) {
+				active = false;
+			}
+			return InputProcessing.processInput(message, this.nickname);
 			
 		} catch (IOException e) {
 			logger.info("connection close");
@@ -57,7 +60,7 @@ public class Client implements Runnable {
 		System.out.println(readServerMessages());
 		boolean nickCorrect = false;
 		while (!nickCorrect) {
-			nickname = scanner.readLine();
+			nickname = reader.readLine();
 			sendClientMessage(nickname);
 			String serverResponse = readServerMessages();
 			System.out.println(serverResponse);
@@ -67,14 +70,14 @@ public class Client implements Runnable {
 
 	public void startClient() throws UnknownHostException, IOException {
 		try (Socket socket = new Socket(this.host, this.port)) {
-			this.scanner = new BufferedReader(new InputStreamReader(System.in));
+			this.reader = new BufferedReader(new InputStreamReader(System.in));
 			out = new PrintWriter(socket.getOutputStream());
 			in = new BufferedReader(new InputStreamReader(
 					socket.getInputStream()));
 			login();
 			new Thread(this).start();
 			while (active) {
-				String message = scanner.readLine();
+				String message = reader.readLine();
 				if (message.equals("#exit")){					
 					active = false;
 				}

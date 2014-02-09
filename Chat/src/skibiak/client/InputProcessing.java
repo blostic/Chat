@@ -28,12 +28,15 @@ public class InputProcessing {
 	}
 	
 	public static String processInput(String message, String nickname){
-		String nick = message.split(":")[0];
-		if (nick.equals(nickname)){
-			return cursorUp(1) + message;
-		} else {
-			return message;
+		if(message!=null){
+			String nick = message.split(":")[0];
+			if (nick.equals(nickname)){
+				return cursorUp(1) + message;
+			} else {
+				return message;
+			}			
 		}
+		return null;
 	}
 	
 }
