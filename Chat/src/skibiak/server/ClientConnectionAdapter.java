@@ -40,7 +40,7 @@ public class ClientConnectionAdapter {
 	public void setUsername(String username) {
 		this.username = username;
 	}
-
+	
 	public void sendMessage(String message) {
 		out.write(message + "\n");
 		out.flush();

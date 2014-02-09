@@ -43,7 +43,10 @@ public class Client implements Runnable {
 
 	public String readServerMessages() throws IOException {
 		try {
-			return in.readLine();
+			
+			String s =  in.readLine();
+			return InputProcessing.processInput(s, this.nickname);
+			
 		} catch (IOException e) {
 			logger.info("connection close");
 			return "Connection Closed";

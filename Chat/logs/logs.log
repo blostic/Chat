@@ -1,0 +1,245 @@
+2014-02-09 12:48:02,491 - skibiak.server.Server - INFO - Server is listening at port 4000
+2014-02-09 12:48:11,046 - skibiak.server.Server - INFO - UserAdek has logged
+2014-02-09 12:48:11,047 - skibiak.server.Room - INFO - Client Adek left room: MainRoom
+2014-02-09 12:48:11,048 - skibiak.server.Server - INFO - User Adek added to room MainRoom
+2014-02-09 12:48:52,085 - skibiak.server.Server - INFO - UserTestujemu has logged
+2014-02-09 12:48:52,087 - skibiak.server.Room - INFO - Client Testujemu left room: MainRoom
+2014-02-09 12:48:52,087 - skibiak.server.Server - INFO - User Testujemu added to room MainRoom
+2014-02-09 12:50:21,189 - skibiak.server.Server - INFO - Server is listening at port 4000
+2014-02-09 12:50:30,782 - skibiak.server.Server - INFO - UserBerdek has logged
+2014-02-09 12:50:30,784 - skibiak.server.Room - INFO - Client Berdek left room: MainRoom
+2014-02-09 12:50:30,786 - skibiak.server.Server - INFO - User Berdek added to room MainRoom
+2014-02-09 13:27:51,383 - skibiak.server.Server - INFO - Server is listening at port 4000
+2014-02-09 13:28:05,127 - skibiak.server.Server - INFO - Usertest has logged
+2014-02-09 13:28:05,128 - skibiak.server.Room - INFO - Client test left room: MainRoom
+2014-02-09 13:28:05,128 - skibiak.server.Server - INFO - User test added to room MainRoom
+2014-02-09 13:28:28,327 - skibiak.server.Server - INFO - Server is listening at port 4000
+2014-02-09 13:28:35,276 - skibiak.server.Server - INFO - Useralksdlaksd has logged
+2014-02-09 13:28:35,277 - skibiak.server.Room - INFO - Client alksdlaksd left room: MainRoom
+2014-02-09 13:28:35,278 - skibiak.server.Server - INFO - User alksdlaksd added to room MainRoom
+2014-02-09 13:28:53,832 - skibiak.server.Server - INFO - Usersprawdzaj has logged
+2014-02-09 13:28:53,833 - skibiak.server.Room - INFO - Client sprawdzaj left room: MainRoom
+2014-02-09 13:28:53,833 - skibiak.server.Server - INFO - User sprawdzaj added to room MainRoom
+2014-02-09 13:30:51,521 - skibiak.server.Server - INFO - Server is listening at port 4000
+2014-02-09 13:30:59,357 - skibiak.server.Server - INFO - Usersdfe has logged
+2014-02-09 13:30:59,359 - skibiak.server.Room - INFO - Client sdfe left room: MainRoom
+2014-02-09 13:30:59,360 - skibiak.server.Server - INFO - User sdfe added to room MainRoom
+2014-02-09 13:31:23,713 - skibiak.server.Server - INFO - Server is listening at port 4000
+2014-02-09 13:31:29,782 - skibiak.server.Server - INFO - Userasd has logged
+2014-02-09 13:31:29,783 - skibiak.server.Room - INFO - Client asd left room: MainRoom
+2014-02-09 13:31:29,783 - skibiak.server.Server - INFO - User asd added to room MainRoom
+2014-02-09 13:37:22,864 - skibiak.server.Server - INFO - Server is listening at port 4000
+2014-02-09 13:37:31,451 - skibiak.server.Server - INFO - Usertest has logged
+2014-02-09 13:37:31,452 - skibiak.server.Room - INFO - Client test left room: MainRoom
+2014-02-09 13:37:31,453 - skibiak.server.Server - INFO - User test added to room MainRoom
+2014-02-09 13:38:41,547 - skibiak.server.Server - INFO - Server is listening at port 4000
+2014-02-09 13:38:55,622 - skibiak.server.Server - INFO - Usertest has logged
+2014-02-09 13:38:55,623 - skibiak.server.Room - INFO - Client test left room: MainRoom
+2014-02-09 13:38:55,624 - skibiak.server.Server - INFO - User test added to room MainRoom
+2014-02-09 13:42:06,964 - skibiak.server.Server - INFO - Server is listening at port 4000
+2014-02-09 13:42:18,145 - skibiak.server.Server - INFO - UserTest has logged
+2014-02-09 13:42:18,146 - skibiak.server.Room - INFO - Client Test left room: MainRoom
+2014-02-09 13:42:18,147 - skibiak.server.Server - INFO - User Test added to room MainRoom
+2014-02-09 13:42:38,518 - skibiak.server.Server - INFO - Usertestuj has logged
+2014-02-09 13:42:38,520 - skibiak.server.Room - INFO - Client testuj left room: MainRoom
+2014-02-09 13:42:38,521 - skibiak.server.Server - INFO - User testuj added to room MainRoom
+2014-02-09 13:43:20,051 - skibiak.server.Server - INFO - Server is listening at port 4000
+2014-02-09 13:43:27,405 - skibiak.server.Server - INFO - UserTest has logged
+2014-02-09 13:43:27,408 - skibiak.server.Room - INFO - Client Test left room: MainRoom
+2014-02-09 13:43:27,409 - skibiak.server.Server - INFO - User Test added to room MainRoom
+2014-02-09 13:45:02,140 - skibiak.server.Server - INFO - Server is listening at port 4000
+2014-02-09 13:45:08,279 - skibiak.server.Server - INFO - Server is listening at port 4000
+2014-02-09 13:45:34,234 - skibiak.server.Server - INFO - Server is listening at port 4000
+2014-02-09 13:46:28,604 - skibiak.server.Server - INFO - Server is listening at port 4000
+2014-02-09 13:49:08,163 - skibiak.server.Server - INFO - Server is listening at port 4000
+2014-02-09 13:49:16,543 - skibiak.server.Server - INFO - Usertest has logged
+2014-02-09 13:49:16,544 - skibiak.server.Room - INFO - Client test left room: MainRoom
+2014-02-09 13:49:16,545 - skibiak.server.Server - INFO - User test added to room MainRoom
+2014-02-09 13:49:51,858 - skibiak.server.Server - INFO - Server is listening at port 4000
+2014-02-09 13:50:00,523 - skibiak.server.Server - INFO - UserHest has logged
+2014-02-09 13:50:00,524 - skibiak.server.Room - INFO - Client Hest left room: MainRoom
+2014-02-09 13:50:00,525 - skibiak.server.Server - INFO - User Hest added to room MainRoom
+2014-02-09 13:55:13,912 - skibiak.server.Server - INFO - Server is listening at port 4000
+2014-02-09 13:55:27,975 - skibiak.server.Server - INFO - Userasda has logged
+2014-02-09 13:55:27,976 - skibiak.server.Room - INFO - Client asda left room: MainRoom
+2014-02-09 13:55:27,977 - skibiak.server.Server - INFO - User asda added to room MainRoom
+2014-02-09 13:56:01,001 - skibiak.server.Server - INFO - Server is listening at port 4000
+2014-02-09 13:56:12,461 - skibiak.server.Server - INFO - Usersprawdza has logged
+2014-02-09 13:56:12,462 - skibiak.server.Room - INFO - Client sprawdza left room: MainRoom
+2014-02-09 13:56:12,463 - skibiak.server.Server - INFO - User sprawdza added to room MainRoom
+2014-02-09 13:59:02,792 - skibiak.server.Server - INFO - Server is listening at port 4000
+2014-02-09 13:59:10,779 - skibiak.server.Server - INFO - UserTest has logged
+2014-02-09 13:59:10,781 - skibiak.server.Room - INFO - Client Test left room: MainRoom
+2014-02-09 13:59:10,782 - skibiak.server.Server - INFO - User Test added to room MainRoom
+2014-02-09 14:00:06,016 - skibiak.server.Server - INFO - Server is listening at port 4000
+2014-02-09 14:00:15,402 - skibiak.server.Server - INFO - Usersprwazdam has logged
+2014-02-09 14:00:15,403 - skibiak.server.Room - INFO - Client sprwazdam left room: MainRoom
+2014-02-09 14:00:15,404 - skibiak.server.Server - INFO - User sprwazdam added to room MainRoom
+2014-02-09 14:00:53,524 - skibiak.server.Server - INFO - Server is listening at port 4000
+2014-02-09 14:01:00,565 - skibiak.server.Server - INFO - Usertest has logged
+2014-02-09 14:01:00,566 - skibiak.server.Room - INFO - Client test left room: MainRoom
+2014-02-09 14:01:00,568 - skibiak.server.Server - INFO - User test added to room MainRoom
+2014-02-09 14:06:44,464 - skibiak.server.Server - INFO - Server is listening at port 4000
+2014-02-09 14:06:58,109 - skibiak.server.Server - INFO - Usersprawdzam has logged
+2014-02-09 14:06:58,110 - skibiak.server.Room - INFO - Client sprawdzam left room: MainRoom
+2014-02-09 14:06:58,111 - skibiak.server.Server - INFO - User sprawdzam added to room MainRoom
+2014-02-09 14:07:23,417 - skibiak.server.Server - INFO - Server is listening at port 4000
+2014-02-09 14:07:34,683 - skibiak.server.Server - INFO - Usertest has logged
+2014-02-09 14:07:34,685 - skibiak.server.Room - INFO - Client test left room: MainRoom
+2014-02-09 14:07:34,685 - skibiak.server.Server - INFO - User test added to room MainRoom
+2014-02-09 14:14:16,171 - skibiak.server.Server - INFO - Server is listening at port 4000
+2014-02-09 14:14:38,686 - skibiak.server.Server - INFO - Usernoooo has logged
+2014-02-09 14:14:38,688 - skibiak.server.Room - INFO - Client noooo left room: MainRoom
+2014-02-09 14:14:38,688 - skibiak.server.Server - INFO - User noooo added to room MainRoom
+2014-02-09 14:15:46,161 - skibiak.server.Server - INFO - Server is listening at port 4000
+2014-02-09 14:16:03,141 - skibiak.server.Server - INFO - Userterrra has logged
+2014-02-09 14:16:03,142 - skibiak.server.Room - INFO - Client terrra left room: MainRoom
+2014-02-09 14:16:03,143 - skibiak.server.Server - INFO - User terrra added to room MainRoom
+2014-02-09 14:20:09,984 - skibiak.server.Server - INFO - Server is listening at port 4000
+2014-02-09 14:20:24,737 - skibiak.server.Server - INFO - UserAleksander has logged
+2014-02-09 14:20:24,738 - skibiak.server.Room - INFO - Client Aleksander left room: MainRoom
+2014-02-09 14:20:24,739 - skibiak.server.Server - INFO - User Aleksander added to room MainRoom
+2014-02-09 14:20:52,672 - skibiak.server.Server - INFO - UserTest has logged
+2014-02-09 14:20:52,674 - skibiak.server.Room - INFO - Client Test left room: MainRoom
+2014-02-09 14:20:52,675 - skibiak.server.Server - INFO - User Test added to room MainRoom
+2014-02-09 14:25:27,710 - skibiak.server.Server - INFO - Server is listening at port 4000
+2014-02-09 14:25:43,750 - skibiak.server.Server - INFO - Userdziala has logged
+2014-02-09 14:25:43,751 - skibiak.server.Room - INFO - Client dziala left room: MainRoom
+2014-02-09 14:25:43,751 - skibiak.server.Server - INFO - User dziala added to room MainRoom
+2014-02-09 14:26:30,295 - skibiak.server.Server - INFO - Server is listening at port 4000
+2014-02-09 14:26:46,034 - skibiak.server.Server - INFO - Useruzytwkonik1 has logged
+2014-02-09 14:26:46,035 - skibiak.server.Room - INFO - Client uzytwkonik1 left room: MainRoom
+2014-02-09 14:26:46,036 - skibiak.server.Server - INFO - User uzytwkonik1 added to room MainRoom
+2014-02-09 14:26:50,947 - skibiak.server.Server - INFO - UserUzytkownik2 has logged
+2014-02-09 14:26:50,948 - skibiak.server.Room - INFO - Client Uzytkownik2 left room: MainRoom
+2014-02-09 14:26:50,948 - skibiak.server.Server - INFO - User Uzytkownik2 added to room MainRoom
+2014-02-09 14:27:25,859 - skibiak.server.Server - INFO - Server is listening at port 4000
+2014-02-09 14:27:44,027 - skibiak.server.Server - INFO - UserAleksander has logged
+2014-02-09 14:27:44,028 - skibiak.server.Room - INFO - Client Aleksander left room: MainRoom
+2014-02-09 14:27:44,029 - skibiak.server.Server - INFO - User Aleksander added to room MainRoom
+2014-02-09 14:28:07,034 - skibiak.server.Server - INFO - Usertest has logged
+2014-02-09 14:28:07,035 - skibiak.server.Room - INFO - Client test left room: MainRoom
+2014-02-09 14:28:07,035 - skibiak.server.Server - INFO - User test added to room MainRoom
+2014-02-09 14:28:36,573 - skibiak.server.Server - INFO - Server is listening at port 4000
+2014-02-09 14:29:21,497 - skibiak.server.Server - INFO - Server is listening at port 4000
+2014-02-09 14:30:15,951 - skibiak.server.Server - INFO - Server is listening at port 4000
+2014-02-09 14:30:26,906 - skibiak.server.Server - INFO - UserHej has logged
+2014-02-09 14:30:26,907 - skibiak.server.Room - INFO - Client Hej left room: MainRoom
+2014-02-09 14:30:26,908 - skibiak.server.Server - INFO - User Hej added to room MainRoom
+2014-02-09 14:30:48,870 - skibiak.server.Server - INFO - Userbernardy has logged
+2014-02-09 14:30:48,872 - skibiak.server.Room - INFO - Client bernardy left room: MainRoom
+2014-02-09 14:30:48,873 - skibiak.server.Server - INFO - User bernardy added to room MainRoom
+2014-02-09 14:31:27,061 - skibiak.server.Server - INFO - Server is listening at port 4000
+2014-02-09 14:31:40,463 - skibiak.server.Server - INFO - UserSprawdzaj has logged
+2014-02-09 14:31:40,465 - skibiak.server.Room - INFO - Client Sprawdzaj left room: MainRoom
+2014-02-09 14:31:40,465 - skibiak.server.Server - INFO - User Sprawdzaj added to room MainRoom
+2014-02-09 14:31:46,066 - skibiak.server.Server - INFO - UserSpradzamy has logged
+2014-02-09 14:31:46,067 - skibiak.server.Room - INFO - Client Spradzamy left room: MainRoom
+2014-02-09 14:31:46,067 - skibiak.server.Server - INFO - User Spradzamy added to room MainRoom
+2014-02-09 14:32:44,421 - skibiak.server.Server - INFO - Server is listening at port 4000
+2014-02-09 14:32:57,315 - skibiak.server.Server - INFO - UserWykop has logged
+2014-02-09 14:32:57,316 - skibiak.server.Room - INFO - Client Wykop left room: MainRoom
+2014-02-09 14:32:57,316 - skibiak.server.Server - INFO - User Wykop added to room MainRoom
+2014-02-09 14:33:17,082 - skibiak.server.Server - INFO - UserKrajniwski has logged
+2014-02-09 14:33:17,083 - skibiak.server.Room - INFO - Client Krajniwski left room: MainRoom
+2014-02-09 14:33:17,084 - skibiak.server.Server - INFO - User Krajniwski added to room MainRoom
+2014-02-09 14:51:23,729 - skibiak.server.Server - INFO - Server is listening at port 4000
+2014-02-09 14:51:33,385 - skibiak.server.Server - INFO - UserTest has logged
+2014-02-09 14:51:33,387 - skibiak.server.Room - INFO - Client Test left room: MainRoom
+2014-02-09 14:51:33,388 - skibiak.server.Server - INFO - User Test added to room MainRoom
+2014-02-09 14:51:46,466 - skibiak.server.Server - INFO - UserAdela has logged
+2014-02-09 14:51:46,467 - skibiak.server.Room - INFO - Client Adela left room: MainRoom
+2014-02-09 14:51:46,468 - skibiak.server.Server - INFO - User Adela added to room MainRoom
+2014-02-09 14:52:46,430 - skibiak.server.Server - INFO - Server is listening at port 4000
+2014-02-09 14:52:57,609 - skibiak.server.Server - INFO - Usertestujemy has logged
+2014-02-09 14:52:57,610 - skibiak.server.Room - INFO - Client testujemy left room: MainRoom
+2014-02-09 14:52:57,611 - skibiak.server.Server - INFO - User testujemy added to room MainRoom
+2014-02-09 14:53:04,883 - skibiak.server.Server - INFO - Userpszczola has logged
+2014-02-09 14:53:04,884 - skibiak.server.Room - INFO - Client pszczola left room: MainRoom
+2014-02-09 14:53:04,885 - skibiak.server.Server - INFO - User pszczola added to room MainRoom
+2014-02-09 14:54:33,865 - skibiak.server.Server - INFO - Server is listening at port 4000
+2014-02-09 14:54:51,896 - skibiak.server.Server - INFO - UserSpraw has logged
+2014-02-09 14:54:51,897 - skibiak.server.Room - INFO - Client Spraw left room: MainRoom
+2014-02-09 14:54:51,898 - skibiak.server.Server - INFO - User Spraw added to room MainRoom
+2014-02-09 14:55:00,219 - skibiak.server.Server - INFO - UserEdek has logged
+2014-02-09 14:55:00,222 - skibiak.server.Room - INFO - Client Edek left room: MainRoom
+2014-02-09 14:55:00,222 - skibiak.server.Server - INFO - User Edek added to room MainRoom
+2014-02-09 14:55:54,434 - skibiak.server.Server - INFO - Usertest has logged
+2014-02-09 14:55:54,435 - skibiak.server.Room - INFO - Client test left room: MainRoom
+2014-02-09 14:55:54,436 - skibiak.server.Server - INFO - User test added to room MainRoom
+2014-02-09 14:56:01,349 - skibiak.server.Server - INFO - Usertest2 has logged
+2014-02-09 14:56:01,351 - skibiak.server.Room - INFO - Client test2 left room: MainRoom
+2014-02-09 14:56:01,352 - skibiak.server.Server - INFO - User test2 added to room MainRoom
+2014-02-09 14:56:55,375 - skibiak.server.Server - INFO - Server is listening at port 4000
+2014-02-09 14:57:04,925 - skibiak.server.Server - INFO - Usertest has logged
+2014-02-09 14:57:04,926 - skibiak.server.Room - INFO - Client test left room: MainRoom
+2014-02-09 14:57:04,926 - skibiak.server.Server - INFO - User test added to room MainRoom
+2014-02-09 14:57:20,140 - skibiak.server.Server - INFO - Userbolek has logged
+2014-02-09 14:57:20,141 - skibiak.server.Room - INFO - Client bolek left room: MainRoom
+2014-02-09 14:57:20,142 - skibiak.server.Server - INFO - User bolek added to room MainRoom
+2014-02-09 14:58:56,403 - skibiak.server.Server - INFO - Server is listening at port 4000
+2014-02-09 14:59:06,099 - skibiak.server.Server - INFO - Useradek has logged
+2014-02-09 14:59:06,100 - skibiak.server.Room - INFO - Client adek left room: MainRoom
+2014-02-09 14:59:06,100 - skibiak.server.Server - INFO - User adek added to room MainRoom
+2014-02-09 14:59:11,501 - skibiak.server.Server - INFO - Userelek has logged
+2014-02-09 14:59:11,502 - skibiak.server.Room - INFO - Client elek left room: MainRoom
+2014-02-09 14:59:11,503 - skibiak.server.Server - INFO - User elek added to room MainRoom
+2014-02-09 15:02:26,838 - skibiak.server.Server - INFO - Server is listening at port 4000
+2014-02-09 15:02:39,960 - skibiak.server.Server - INFO - Useropeneopen has logged
+2014-02-09 15:02:39,961 - skibiak.server.Room - INFO - Client openeopen left room: MainRoom
+2014-02-09 15:02:39,962 - skibiak.server.Server - INFO - User openeopen added to room MainRoom
+2014-02-09 15:03:11,270 - skibiak.server.Server - INFO - Usertesttest has logged
+2014-02-09 15:03:11,271 - skibiak.server.Room - INFO - Client testtest left room: MainRoom
+2014-02-09 15:03:11,272 - skibiak.server.Server - INFO - User testtest added to room MainRoom
+2014-02-09 15:03:49,133 - skibiak.server.Server - INFO - Server is listening at port 4000
+2014-02-09 15:04:05,244 - skibiak.server.Server - INFO - Usertest has logged
+2014-02-09 15:04:05,245 - skibiak.server.Room - INFO - Client test left room: MainRoom
+2014-02-09 15:04:05,246 - skibiak.server.Server - INFO - User test added to room MainRoom
+2014-02-09 15:04:11,288 - skibiak.server.Server - INFO - Userkwejk has logged
+2014-02-09 15:04:11,288 - skibiak.server.Room - INFO - Client kwejk left room: MainRoom
+2014-02-09 15:04:11,289 - skibiak.server.Server - INFO - User kwejk added to room MainRoom
+2014-02-09 15:05:41,928 - skibiak.server.Server - INFO - Server is listening at port 4000
+2014-02-09 15:05:58,305 - skibiak.server.Server - INFO - Usertest has logged
+2014-02-09 15:05:58,306 - skibiak.server.Room - INFO - Client test left room: MainRoom
+2014-02-09 15:05:58,307 - skibiak.server.Server - INFO - User test added to room MainRoom
+2014-02-09 15:06:00,008 - skibiak.server.Server - INFO - Usertest2 has logged
+2014-02-09 15:06:00,009 - skibiak.server.Room - INFO - Client test2 left room: MainRoom
+2014-02-09 15:06:00,009 - skibiak.server.Server - INFO - User test2 added to room MainRoom
+2014-02-09 15:06:07,733 - skibiak.server.Room - INFO - connection close
+2014-02-09 15:06:39,655 - skibiak.server.Server - INFO - Server is listening at port 4000
+2014-02-09 15:08:06,189 - skibiak.server.Server - INFO - UserBartomelo has logged
+2014-02-09 15:08:06,190 - skibiak.server.Room - INFO - Client Bartomelo left room: MainRoom
+2014-02-09 15:08:06,191 - skibiak.server.Server - INFO - User Bartomelo added to room MainRoom
+2014-02-09 15:08:10,643 - skibiak.server.Server - INFO - UserAdelajda has logged
+2014-02-09 15:08:10,644 - skibiak.server.Room - INFO - Client Adelajda left room: MainRoom
+2014-02-09 15:08:10,645 - skibiak.server.Server - INFO - User Adelajda added to room MainRoom
+2014-02-09 15:09:39,139 - skibiak.server.Server - INFO - Command from user Bartomelo parsed correctly
+2014-02-09 15:09:46,962 - skibiak.server.Server - INFO - Command from user Bartomelo parsed correctly
+2014-02-09 15:09:51,379 - skibiak.server.Server - INFO - Command from user Adelajda parsed correctly
+2014-02-09 15:10:19,544 - skibiak.server.Server - INFO - Command from user Adelajda parsed correctly
+2014-02-09 15:10:19,547 - skibiak.server.Room - INFO - Client Adelajda left room: MainRoom
+2014-02-09 15:10:19,547 - skibiak.server.Server - INFO - >Adelajda added room test
+2014-02-09 15:10:59,334 - skibiak.server.Server - INFO - Command from user Adelajda parsed correctly
+2014-02-09 15:11:03,253 - skibiak.server.Server - INFO - Command from user Adelajda parsed correctly
+2014-02-09 15:11:14,681 - skibiak.server.Server - INFO - Command from user Adelajda parsed correctly
+2014-02-09 15:11:14,684 - skibiak.server.Room - INFO - Client Adelajda left room: test
+2014-02-09 15:11:14,685 - skibiak.server.Server - INFO - User Adelajda added to room test
+2014-02-09 15:11:33,190 - skibiak.server.Server - INFO - Command from user Bartomelo parsed correctly
+2014-02-09 15:11:33,191 - skibiak.server.Room - INFO - Client Bartomelo left room: MainRoom
+2014-02-09 15:11:33,192 - skibiak.server.Server - INFO - User Bartomelo added to room test
+2014-02-09 15:11:37,634 - skibiak.server.Server - INFO - Command from user Bartomelo parsed correctly
+2014-02-09 15:14:53,203 - skibiak.server.Server - ERROR - Unknow option provided by Bartomelo
+2014-02-09 15:15:05,742 - skibiak.server.Server - ERROR - Unknow option provided by Bartomelo
+2014-02-09 15:15:20,777 - skibiak.server.Server - INFO - Command from user Bartomelo parsed correctly
+2014-02-09 15:15:20,794 - skibiak.server.Room - INFO - Client Bartomelo left room: test
+2014-02-09 15:15:20,794 - skibiak.server.Server - INFO - >Bartomelo added room pricate
+2014-02-09 15:23:15,174 - skibiak.server.Server - INFO - Server is listening at port 4000
+2014-02-09 15:23:24,061 - skibiak.server.Server - INFO - Usertest has logged
+2014-02-09 15:23:24,063 - skibiak.server.Room - INFO - Client test left room: MainRoom
+2014-02-09 15:23:24,064 - skibiak.server.Server - INFO - User test added to room MainRoom
+2014-02-09 15:23:26,044 - skibiak.server.Server - INFO - Usertest2 has logged
+2014-02-09 15:23:26,045 - skibiak.server.Room - INFO - Client test2 left room: MainRoom
+2014-02-09 15:23:26,045 - skibiak.server.Server - INFO - User test2 added to room MainRoom
+2014-02-09 15:24:25,685 - skibiak.server.Server - INFO - Usersdfsdf has logged
+2014-02-09 15:24:25,748 - skibiak.server.Room - INFO - Client sdfsdf left room: MainRoom
+2014-02-09 15:24:25,748 - skibiak.server.Server - INFO - User sdfsdf added to room MainRoom
