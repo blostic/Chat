@@ -79,12 +79,15 @@ public class ClientRequestHandler {
 
 	private void switchRoom() {
 		server.addUserToRoom(client, roomName);
+		client.sendMessage(">Switched to " + roomName);
+		
 	}
 
 	private void changeTopic() {
 		client.getPresentRoom().setChatTopic(roomTopic);
 		client.getPresentRoom().annouceMessage(
 				">" + client.getUsername() + " changed topic to: " + roomTopic);
+		client.sendMessage(">Topic changed to " + roomTopic);
 		logger.info(client.getUsername() + " changed topic to: " + roomTopic);
 	}
 

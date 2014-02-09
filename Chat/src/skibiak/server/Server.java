@@ -62,13 +62,13 @@ public class Server implements Runnable{
 		String roomName = room.getRoomName();
 		if (!rooms.containsKey(roomName)) {
 			rooms.put(room.getRoomName(), room);
-			client.sendMessage("Created room " + roomName);
+			client.sendMessage(">Created room " + roomName);
 			return true;
 		} else {
 			logger.warn("User " + client.getUsername()
 					+ " tried to add room which already exist [" + roomName
 					+ "]");
-			client.sendMessage("Room already exist");
+			client.sendMessage(">Room already exist");
 			return false;
 		}
 	}
@@ -185,7 +185,7 @@ public class Server implements Runnable{
 			try {
 				while (!userFree) {
 					String username = client.readMessage();
-					if (validUsername(username)) {
+					if (username != null && validUsername(username)) {
 						userFree = syncUserLogin(username);
 						if (!userFree) {
 							client.sendMessage(">Username " + username

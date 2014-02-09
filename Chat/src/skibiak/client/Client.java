@@ -24,6 +24,18 @@ public class Client implements Runnable {
 	private BufferedReader in;
 	private boolean active = true;
 
+	public String getNickname(){
+		return nickname;
+	}
+	
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
+	}
+	
 	public Client(int port, String host) {
 		this.port = port;
 		this.host = host;
@@ -46,10 +58,9 @@ public class Client implements Runnable {
 			
 			String message = in.readLine();
 			if (message != null && message.equals(">GoodBye!")) {
-				active = false;
+				setActive(false);
 			}
 			return InputProcessing.processInput(message, this.nickname);
-			
 		} catch (IOException e) {
 			logger.info("connection close");
 			return "Connection Closed";
@@ -64,22 +75,22 @@ public class Client implements Runnable {
 			sendClientMessage(nickname);
 			String serverResponse = readServerMessages();
 			System.out.println(serverResponse);
-			nickCorrect = (serverResponse.split(" ")[0].equals("Welcome"));
+			nickCorrect = (serverResponse.split(" ")[0].equals(">Welcome"));
 		}
 	}
 
 	public void startClient() throws UnknownHostException, IOException {
 		try (Socket socket = new Socket(this.host, this.port)) {
-			this.reader = new BufferedReader(new InputStreamReader(System.in));
+			reader = new BufferedReader(new InputStreamReader(System.in));
 			out = new PrintWriter(socket.getOutputStream());
 			in = new BufferedReader(new InputStreamReader(
 					socket.getInputStream()));
 			login();
 			new Thread(this).start();
-			while (active) {
+			while (isActive()) {
 				String message = reader.readLine();
-				if (message.equals("#exit")){					
-					active = false;
+				if (message != null && message.equals("#exit")) {
+					setActive(false);
 				}
 				sendClientMessage(message);
 			}
@@ -88,7 +99,7 @@ public class Client implements Runnable {
 
 	@Override
 	public void run() {
-		while (active) {
+		while (isActive()) {
 			try {
 				Thread.sleep(100);
 				String message = this.readServerMessages();
@@ -115,4 +126,5 @@ public class Client implements Runnable {
 			logger.error(e);
 		}
 	}
+	
 }

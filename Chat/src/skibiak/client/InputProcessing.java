@@ -11,20 +11,12 @@ public class InputProcessing {
 	private static char ESC = 0x1b;
 	private static String CSI = "" + ESC + '[';
 
-	public static String CUU(int n) {
+	public static String cursorUp(int n) {
 		return CSI + n + 'A';
 	}
 
-	public static String CUD(int n) {
-		return CSI + n + 'B';
-	}
-
-	public static String cursorUp(int n) {
-		return CUU(n);
-	}
-
 	public static String cursorDown(int n) {
-		return CUD(n);
+		return CSI + n + 'B';
 	}
 	
 	public static String processInput(String message, String nickname){

@@ -85,7 +85,7 @@ public class ServerTest {
 			Assert.assertTrue(in2.readLine().equals(">Please choose a username: "));
 			out2.write("Benek\n");
 			out2.flush();
-		
+
 			Assert.assertTrue(in2.readLine().equals(">Username Benek is already in use. Try something else."));
 			out2.write("Benn\n");
 			out2.flush();
@@ -93,6 +93,10 @@ public class ServerTest {
 			Assert.assertTrue(in2.readLine().equals(">Welcome Benn!"));
 			Assert.assertTrue(in.readLine().equals(">User Benn entered the room"));
 			
+			in.close();
+			in2.close();
+			out.close();
+			out2.close();
 		}
 	}
 	
