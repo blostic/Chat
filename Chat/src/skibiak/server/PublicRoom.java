@@ -29,14 +29,14 @@ public class PublicRoom extends Room {
 	public void annouceMessage(String message) {
 		System.out.println("MESSAGE [" + getRoomName() + "] "
 				+ message);
-		for (ClientConnectionAdapter connection : clients) {
+		for (ClientConnectionAdapter connection : this.getClients()) {
 			connection.sendMessage(message);
 		}
 	}
 
 	@Override
 	public void readMessages() throws IOException {
-		for (ClientConnectionAdapter connection : clients) {
+		for (ClientConnectionAdapter connection : this.getClients()) {
 			if (connection.containMessage()) {
 				String message = connection.readMessage();
 				if (!message.startsWith("#")) {

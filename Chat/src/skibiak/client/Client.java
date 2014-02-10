@@ -60,7 +60,7 @@ public class Client implements Runnable {
 			if (message != null && message.equals(">GoodBye!")) {
 				setActive(false);
 			}
-			return InputProcessing.processInput(message, this.nickname);
+			return OutputProcessing.processInput(message, this.nickname);
 		} catch (IOException e) {
 			logger.info("connection close");
 			return "Connection Closed";

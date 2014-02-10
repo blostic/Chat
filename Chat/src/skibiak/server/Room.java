@@ -14,9 +14,8 @@ public abstract class Room implements Runnable {
 	private String chatTopic;
 	private String roomName;
 	private String roomMaster;
-	private ClientRequestHandler requestHandler;
-	
-	protected final List<ClientConnectionAdapter> clients;
+
+	final List<ClientConnectionAdapter> clients;
 	protected final Server server;
 	
 	public Room(Server server, String roomName, String chatTopic, String roomMaster) {
@@ -36,21 +35,27 @@ public abstract class Room implements Runnable {
 
 	public void startRoom() {
 		new Thread(this).start();
+		
 		new Runnable() {
-			
+
 			@Override
 			public void run() {
-				while(server.isActive()){
+				while (server.isActive()) {
+					try {
+						Thread.sleep(100);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
 					removeUnresponsiveClients();
 				}
 			}
 		};
-		
+
 	}
 
 	public void removeUnresponsiveClients() {
 		List<ClientConnectionAdapter> clientsToRemove = new ArrayList<ClientConnectionAdapter>();
-		for (ClientConnectionAdapter clientConnection : clients) {
+		for (ClientConnectionAdapter clientConnection : getClients() ) {
 			if (clientConnection.clientDisconected()) {
 				clientsToRemove.add(clientConnection);
 			}
@@ -88,10 +93,6 @@ public abstract class Room implements Runnable {
 		this.roomName = roomName;
 	}
 	
-	public ClientRequestHandler getRequestHandler(){
-		return this.requestHandler;
-	}
-	
 	public abstract void annouceMessage(String message);
 
 	public abstract void readMessages() throws IOException;
@@ -100,6 +101,15 @@ public abstract class Room implements Runnable {
 		return roomMaster;
 	}
 
+	public boolean containUser(String username){
+		for (ClientConnectionAdapter clientConnection : this.getClients()) {
+			if (clientConnection.getUsername().equals(username)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	public void setRoomMaster(String roomMaster) {
 		this.roomMaster = roomMaster;
 	}

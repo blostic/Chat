@@ -59,10 +59,11 @@ public class ClientRequestHandler {
 					&& roomTopic.length() > 1) {
 				Room room = RoomFactory.getInstance(server, roomName, roomType,
 						roomTopic, client.getUsername());
-				server.addRoomToServer(client, room);
-				client.setPresentRoom(room);
-				logger.info(">" + client.getUsername() + " added room "
-						+ roomName);
+				if( server.addRoomToServer(client, room)){
+					room.addClient(client);
+					client.setPresentRoom(room);					
+					logger.info(">" + client.getUsername() + " added room "+ roomName);
+				}
 			} else {
 				logger.error(client.getUsername()
 						+ " didn't provide all required parameters to create new room");
@@ -78,9 +79,11 @@ public class ClientRequestHandler {
 	}
 
 	private void switchRoom() {
-		server.addUserToRoom(client, roomName);
-		client.sendMessage(">Switched to " + roomName);
-		
+		if( server.addUserToRoom(client, roomName )){
+			client.sendMessage(">Switched to " + roomName);			
+		} else {
+			client.sendMessage("Room doesn't exist");
+		}
 	}
 
 	private void changeTopic() {

@@ -1,7 +1,6 @@
 package skibiak.server;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Collection;
@@ -20,10 +19,14 @@ public class CensoredRoom extends Room {
 
 	private final Trie trie;
 
-	public CensoredRoom(Server server, String roomName, String chatTopic,String roomMaster) {
+	public CensoredRoom(Server server, String roomName, String chatTopic, String roomMaster) {
 		super(server, roomName, chatTopic, roomMaster);
 		this.trie = new Trie().removeOverlaps().onlyWholeWords().caseInsensitive();
-		this.addBannedWords();
+		try {
+			this.addBannedWords("wordsToAvoid.txt");
+		} catch (IOException e) {
+			e.printStackTrace(); 	// No default file with swears
+		}
 		this.startRoom();
 	}
 
@@ -41,17 +44,14 @@ public class CensoredRoom extends Room {
 		}
 	}
 
-	private final void addBannedWords() {
-		try (BufferedReader reader = new BufferedReader(new FileReader("wordsToAvoid.txt"))) {
+	public final void addBannedWords(String filePath) throws IOException {
+		try (BufferedReader reader = new BufferedReader(
+				new FileReader(filePath))) {
 			String line = reader.readLine();
 			while (line != null) {
 				trie.addKeyword(line);
 				line = reader.readLine();
 			}
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
 		}
 	}
 
@@ -59,7 +59,7 @@ public class CensoredRoom extends Room {
 		return word.replaceAll(".", "*");
 	}
 
-	private String censureMessage(String message) {
+	public String censureMessage(String message) {
 		Collection<Token> tokens = trie.tokenize(message);
 		StringBuffer result = new StringBuffer();
 		for (Token token : tokens) {
@@ -76,15 +76,14 @@ public class CensoredRoom extends Room {
 	public void annouceMessage(String message) {
 		System.out.println("MESSAGE [" + getRoomName() + "] "
 				+ message);
-		message = censureMessage(message);
-		for (ClientConnectionAdapter connection : clients) {
+		for (ClientConnectionAdapter connection : this.getClients()) {
 			connection.sendMessage(message);
 		}
 	}
 
 	@Override
 	public void readMessages() throws IOException {
-		for (ClientConnectionAdapter connection : clients) {
+		for (ClientConnectionAdapter connection : this.getClients()) {
 			if (connection.containMessage()) {
 				String message = connection.readMessage();
 				message = censureMessage(message);

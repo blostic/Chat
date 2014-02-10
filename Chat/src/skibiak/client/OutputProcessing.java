@@ -6,7 +6,7 @@ package skibiak.client;
  *
  */
 
-public class InputProcessing {
+public class OutputProcessing {
 
 	private static char ESC = 0x1b;
 	private static String CSI = "" + ESC + '[';

@@ -37,7 +37,7 @@ public class Server implements Runnable{
 			rooms.put("MainRoom", RoomFactory.getInstance(this, "MainRoom",
 					"public", "Everything about Everyone", "bb"));
 		} catch (ClassNotFoundException e) {
-		//This should never happen
+			throw new RuntimeException();
  		}
 	}
 	
@@ -75,16 +75,14 @@ public class Server implements Runnable{
 
 	public boolean containUser(String username) {
 		for (Room room : rooms.values()) {
-			for (ClientConnectionAdapter clientConnection : room.getClients()) {
-				if (clientConnection.getUsername().equals(username)) {
-					return true;
-				}
+			if (room.containUser(username)){
+				return true;
 			}
 		}
 		return false;
 	}
 	
-	public void addUserToRoom(ClientConnectionAdapter client, String roomName) {
+	public boolean addUserToRoom(ClientConnectionAdapter client, String roomName) {
 		if (rooms.containsKey(roomName)) {
 			Room room = rooms.get(roomName);
 			room.annouceMessage(">User " + client.getUsername()
@@ -93,11 +91,12 @@ public class Server implements Runnable{
 			room.addClient(client);
 			logger.info("User " + client.getUsername() + " added to room "
 					+ roomName);
+			return true;
 		} else {
-			client.sendMessage("Room doesn't exist");
 			logger.warn("User " + client.getUsername()
 					+ " has selected a room that does not exist [" + roomName
 					+ "]");
+			return false;
 		}
 	}
 	
