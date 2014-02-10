@@ -29,21 +29,18 @@ public class ServerTest {
 	private static Server server;
 	
 	@Before
-	public void setUp(){
-		server = new Server(4000);		
+	public void setUp() throws IOException{
+		server = new Server(4002);		
 	}
 
 	@After
-    public void tearDown() {
+    public void tearDown() throws IOException {
         server.closeServer();
     }
 	
 	@Test
 	public void runServerTest() throws InterruptedException{
 		new Thread(server).start();
-		Thread.sleep(500);
-		server.closeServer();
-		
 	}
 
 	@Test
@@ -67,11 +64,12 @@ public class ServerTest {
 		Assert.assertFalse(server.containUser("Test"));
 		
 	}
+	
 	@Test
-	public void serverVSclientTest() throws UnknownHostException, IOException, InterruptedException {
+	public void serverPlusClientTest() throws UnknownHostException, IOException, InterruptedException {
 		new Thread(server).start();
-		try (	Socket socket = new Socket("localhost", 4000);
-				Socket socket2 = new Socket("localhost", 4000)) {
+		try (	Socket socket = new Socket("localhost", 4002);
+				Socket socket2 = new Socket("localhost", 4002)) {
 
 			BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 			PrintWriter out = new PrintWriter(socket.getOutputStream());			
@@ -98,6 +96,7 @@ public class ServerTest {
 			out.close();
 			out2.close();
 		}
+		server.closeServer();
 	}
 	
 }

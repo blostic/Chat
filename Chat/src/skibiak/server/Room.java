@@ -11,20 +11,18 @@ import org.apache.log4j.PropertyConfigurator;
 
 public abstract class Room implements Runnable {
 	private static Logger logger = Logger.getLogger(Room.class);
+	private final String roomName;
 	private String chatTopic;
-	private String roomName;
-	private String roomMaster;
 
 	final List<ClientConnectionAdapter> clients;
 	protected final Server server;
-	
-	public Room(Server server, String roomName, String chatTopic, String roomMaster) {
+
+	public Room(Server server, String roomName, String chatTopic) {
 		this.chatTopic = chatTopic;
+		this.roomName = roomName;
 		this.clients = new CopyOnWriteArrayList<ClientConnectionAdapter>();
 		this.server = server;
-		this.setRoomMaster(roomMaster);
-		this.setRoomName(roomName);
-		
+
 		PropertyConfigurator.configure("log4j.properties");
 		logger.setLevel(Level.INFO);
 	}
@@ -35,7 +33,6 @@ public abstract class Room implements Runnable {
 
 	public void startRoom() {
 		new Thread(this).start();
-		
 		new Runnable() {
 
 			@Override
@@ -43,32 +40,31 @@ public abstract class Room implements Runnable {
 				while (server.isActive()) {
 					try {
 						Thread.sleep(100);
+						removeUnresponsiveClients();
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
-					removeUnresponsiveClients();
 				}
 			}
 		};
-
 	}
 
 	public void removeUnresponsiveClients() {
 		List<ClientConnectionAdapter> clientsToRemove = new ArrayList<ClientConnectionAdapter>();
-		for (ClientConnectionAdapter clientConnection : getClients() ) {
+		for (ClientConnectionAdapter clientConnection : getClients()) {
 			if (clientConnection.clientDisconected()) {
 				clientsToRemove.add(clientConnection);
 			}
 		}
-		for (ClientConnectionAdapter  client: clientsToRemove){
+		for (ClientConnectionAdapter client : clientsToRemove) {
 			removeClient(client);
 		}
 	}
-	
+
 	public void addClient(ClientConnectionAdapter client) {
 		logger.info("Client " + client.getUsername() + " entered room: "
 				+ this.roomName);
-		this.clients.add(client);
+		clients.add(client);
 	}
 
 	public void removeClient(ClientConnectionAdapter client) {
@@ -78,7 +74,7 @@ public abstract class Room implements Runnable {
 	}
 
 	public String getChatTopic() {
-		return this.chatTopic;
+		return chatTopic;
 	}
 
 	public void setChatTopic(String chatTopic) {
@@ -89,17 +85,9 @@ public abstract class Room implements Runnable {
 		return roomName;
 	}
 
-	public void setRoomName(String roomName) {
-		this.roomName = roomName;
-	}
-	
 	public abstract void annouceMessage(String message);
 
 	public abstract void readMessages() throws IOException;
-
-	public String getRoomMaster() {
-		return roomMaster;
-	}
 
 	public boolean containUser(String username){
 		for (ClientConnectionAdapter clientConnection : this.getClients()) {
@@ -108,10 +96,6 @@ public abstract class Room implements Runnable {
 			}
 		}
 		return false;
-	}
-	
-	public void setRoomMaster(String roomMaster) {
-		this.roomMaster = roomMaster;
 	}
 
 }

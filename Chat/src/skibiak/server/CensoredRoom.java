@@ -19,8 +19,8 @@ public class CensoredRoom extends Room {
 
 	private final Trie trie;
 
-	public CensoredRoom(Server server, String roomName, String chatTopic, String roomMaster) {
-		super(server, roomName, chatTopic, roomMaster);
+	public CensoredRoom(Server server, String roomName, String chatTopic) {
+		super(server, roomName, chatTopic);
 		this.trie = new Trie().removeOverlaps().onlyWholeWords().caseInsensitive();
 		try {
 			this.addBannedWords("wordsToAvoid.txt");
@@ -55,7 +55,7 @@ public class CensoredRoom extends Room {
 		}
 	}
 
-	private String toAsterisks(String word){
+	private final String toAsterisks(String word){
 		return word.replaceAll(".", "*");
 	}
 

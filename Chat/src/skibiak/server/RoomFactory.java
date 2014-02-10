@@ -2,12 +2,12 @@ package skibiak.server;
 
 public class RoomFactory {
 	public static Room getInstance(Server server, String name, String type,
-			String topic, String master) throws ClassNotFoundException {
+			String topic) throws ClassNotFoundException {
 		switch (type.toLowerCase()) {
 		case "public":
-			return new PublicRoom(server, name, topic, master);
+			return new PublicRoom(server, name, topic);
 		case "censored":
-			return new CensoredRoom(server, name, topic, master);
+			return new CensoredRoom(server, name, topic);
 		default:
 			throw new ClassNotFoundException();
 		}

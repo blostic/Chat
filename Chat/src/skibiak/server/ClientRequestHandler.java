@@ -58,11 +58,11 @@ public class ClientRequestHandler {
 			if (roomName.length() > 1 && roomType.length() > 1
 					&& roomTopic.length() > 1) {
 				Room room = RoomFactory.getInstance(server, roomName, roomType,
-						roomTopic, client.getUsername());
-				if( server.addRoomToServer(client, room)){
+						roomTopic);
+				if (server.addRoomToServer(client, room)) {
 					room.addClient(client);
-					client.setPresentRoom(room);					
-					logger.info(">" + client.getUsername() + " added room "+ roomName);
+					client.setPresentRoom(room);
+					logger.info(">" + client.getUsername() + " added room " + roomName);
 				}
 			} else {
 				logger.error(client.getUsername()
@@ -120,7 +120,7 @@ public class ClientRequestHandler {
 		client.sendMessage(">GoodBye!");
 	}
 
-	String replaceQuotation(String options) {
+	public String replaceQuotation(String options) {
 		String regex = "\".*?\"";
 		Pattern p = Pattern.compile(regex);
 		Matcher m = p.matcher(options);

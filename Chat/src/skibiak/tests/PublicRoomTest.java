@@ -23,7 +23,7 @@ public class PublicRoomTest {
 	@Before
 	public void setUp() {
 		when(server.isActive()).thenReturn(true);
-		room = new PublicRoom(server, "test room", "test topic", "Big Ben");
+		room = new PublicRoom(server, "test room", "test topic");
 	}
 
 	@Test

@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.net.SocketTimeoutException;
+import java.net.SocketException;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -16,12 +16,13 @@ import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 
-public class Server implements Runnable{
+public class Server implements Runnable {
 	private static Logger logger = Logger.getLogger(Server.class);
-	private Map<String, Room> rooms;
-	private int port;
+	private final Map<String, Room> rooms;
+
 	private boolean active = true;
-	
+	private final ServerSocket serverSocket;
+
 	public boolean isActive() {
 		return active;
 	}
@@ -30,31 +31,30 @@ public class Server implements Runnable{
 		return rooms;
 	}
 
-	public Server(int port) {
-		this.port = port;
+	public Server(int port) throws IOException {
+		this.serverSocket = new ServerSocket(port);
 		this.rooms = Collections.synchronizedMap(new HashMap<String, Room>());
 		try {
 			rooms.put("MainRoom", RoomFactory.getInstance(this, "MainRoom",
-					"public", "Everything about Everyone", "bb"));
+					"public", "Everything about Everyone"));
 		} catch (ClassNotFoundException e) {
 			throw new RuntimeException();
- 		}
+		}
 	}
 	
 	@Override
 	public void run() {
 		new Thread(new ServerController()).start();
-		try (ServerSocket socket = new ServerSocket(port)) {
-			while (active) {
-				try{
-					socket.setSoTimeout(100);					
-					Socket clientSocket = socket.accept();
-					new Thread(new LogUser(clientSocket)).start();
-				} catch (SocketTimeoutException e){
-				}
+		while (active) {
+			Socket clientSocket;
+			try {
+				clientSocket = serverSocket.accept();
+				new Thread(new LogUser(clientSocket)).start();
+			} catch (SocketException e) {
+				logger.info("Socket closed");
+			} catch (IOException e) {
+				e.printStackTrace();
 			}
-		} catch (IOException e1) {
-			e1.printStackTrace();
 		}
 	}
 
@@ -75,7 +75,7 @@ public class Server implements Runnable{
 
 	public boolean containUser(String username) {
 		for (Room room : rooms.values()) {
-			if (room.containUser(username)){
+			if (room.containUser(username)) {
 				return true;
 			}
 		}
@@ -100,11 +100,12 @@ public class Server implements Runnable{
 		}
 	}
 	
-	public void closeServer(){
-		for (Room room : rooms.values()){
+	public void closeServer() throws IOException {
+		for (Room room : rooms.values()) {
 			room.annouceMessage(">GoodBye!");
 		}
 		active = false;
+		serverSocket.close();
 	}
 	
 	public static void main(String[] args) {
@@ -114,15 +115,17 @@ public class Server implements Runnable{
 			int port = Integer.parseInt(args[0]);
 			if (port > 1024 && port < 65535) {
 				logger.info("Server is listening at port " + port);
-				new Thread(new Server(port)).start();;
+				new Thread(new Server(port)).start();
 			} else {
 				logger.error("Uncorect port");
 			}
 		} catch (NumberFormatException e) {
 			logger.error("No port provided");
 			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
-		
+
 	}
 
 	private class ServerController implements Runnable {
@@ -139,15 +142,14 @@ public class Server implements Runnable{
 					}
 				}
 			} catch (IOException e) {
-				closeServer();
 				e.printStackTrace();
 			}
 		}
 	}
 
 	private class LogUser implements Runnable {
+		
 		private final ClientConnectionAdapter client;
-
 		private static final String USERNAME_PATTERN = "^[a-z0-9_-]{3,15}$";
 
 		private LogUser(Socket clientSocket) {

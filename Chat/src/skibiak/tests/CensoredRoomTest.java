@@ -23,7 +23,7 @@ public class CensoredRoomTest {
 	@Before
 	public void setUp() {
 		when(server.isActive()).thenReturn(true);
-		room = new CensoredRoom(server, "test room", "test topic", "Big Ben");
+		room = new CensoredRoom(server, "test room", "test topic");
 	}
 
 	@Test

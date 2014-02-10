@@ -5,9 +5,8 @@ import java.io.IOException;
 import com.beust.jcommander.ParameterException;
 
 public class PublicRoom extends Room {
-	public PublicRoom(Server server, String roomName, String chatTopic,
-			String roomMaster) {
-		super(server, roomName, chatTopic, roomMaster);
+	public PublicRoom(Server server, String roomName, String chatTopic) {
+		super(server, roomName, chatTopic);
 		this.startRoom();
 	}
 

@@ -8,7 +8,6 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 import org.junit.Assert;
-
 import org.junit.Test;
 
 import skibiak.client.Client;
@@ -21,7 +20,7 @@ public class ClientTest {
 	private PrintWriter out;
 
 	@Test
-	public void BangTest() throws IOException {
+	public void BangTest() throws IOException, InterruptedException {
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
@@ -46,12 +45,14 @@ public class ClientTest {
 		InputStream testInput = new ByteArrayInputStream(data.getBytes("UTF-8"));
 		System.setIn(testInput);
 		
-		client = new Client(4001, "localhost");
+		client = new Client(4001, "localhost");		
+		Thread.sleep(100);
+		
 		client.startClient();
 		client.setActive(false);
 		Assert.assertTrue(client.getNickname().equals("Berta"));
 		System.setIn(old);
-
+		
 		testInput.close();
 		clientSocket.close();
 		out.close();
