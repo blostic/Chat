@@ -9,8 +9,8 @@ import java.net.Socket;
 public class ClientConnectionAdapter {
 	private String username;
 	private Room presentRoom;
-	private PrintWriter out;
-	private BufferedReader in;
+	private final PrintWriter out;
+	private final BufferedReader in;
 
 	public Room getPresentRoom() {
 		return presentRoom;
@@ -21,15 +21,12 @@ public class ClientConnectionAdapter {
 		this.presentRoom = presentRoom;
 	}
 
-	public ClientConnectionAdapter(Socket socket, Room presetRoom) {
+	public ClientConnectionAdapter(Socket socket, Room presetRoom)
+			throws IOException {
 		this.presentRoom = presetRoom;
-		try {
-			out = new PrintWriter(socket.getOutputStream());
-			in = new BufferedReader(new InputStreamReader(
-					socket.getInputStream()));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		out = new PrintWriter(socket.getOutputStream());
+		in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+
 	}
 
 	public String getUsername() {

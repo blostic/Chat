@@ -15,14 +15,15 @@ import skibiak.server.Room;
 
 public class Client implements Runnable {
 	private final static Logger logger = Logger.getLogger(Room.class);
-	private final int port;
-	private final String host;
-	private String nickname;
 	
-	private BufferedReader reader;
-	private PrintWriter out;
-	private BufferedReader in;
+	private final int serverPort;
+	private final String serverHost;
+	private String nickname;
 	private boolean active = true;
+	
+	private BufferedReader userInputReader;
+	private PrintWriter clientOut;
+	private BufferedReader clientIn;
 
 	public String getNickname(){
 		return nickname;
@@ -37,58 +38,61 @@ public class Client implements Runnable {
 	}
 	
 	public Client(int port, String host) {
-		this.port = port;
-		this.host = host;
+		this.serverPort = port;
+		this.serverHost = host;
+		
 		PropertyConfigurator.configure("log4j.properties");
 		logger.setLevel(Level.INFO);
 	}
 
 	public void sendClientMessage(String message) throws IOException {
-		if (!out.checkError()) {
-			out.write(message + "\n");
-			out.flush();
+		if (!clientOut.checkError()) {
+			if (message != null) {
+				clientOut.write(message + "\n");
+				clientOut.flush();
+			}
 		} else {
 			logger.error("Connection closed by remote host");
+			System.out.println("Connection closed by remote host");
 			System.exit(1);
 		}
 	}
 
-	public String readServerMessages() throws IOException {
+	public String readServerMessages() {
 		try {
-			
-			String message = in.readLine();
+			String message = clientIn.readLine();
 			if (message != null && message.equals(">GoodBye!")) {
 				setActive(false);
 			}
-			return OutputProcessing.processInput(message, this.nickname);
+			return OutputProcessing.processInput(message, nickname);
 		} catch (IOException e) {
-			logger.info("connection close");
+			logger.info("connection closed");
+			setActive(false);
 			return "Connection Closed";
 		}
 	}
 
-	public void login() throws IOException {
+	public void logUser() throws IOException {
 		System.out.println(readServerMessages());
-		boolean nickCorrect = false;
-		while (!nickCorrect) {
-			nickname = reader.readLine();
+		boolean isNickCorrect = false;
+		while (!isNickCorrect) {
+			nickname = userInputReader.readLine();
 			sendClientMessage(nickname);
 			String serverResponse = readServerMessages();
 			System.out.println(serverResponse);
-			nickCorrect = (serverResponse.split(" ")[0].equals(">Welcome"));
+			isNickCorrect = (serverResponse.split(" ")[0].equals(">Welcome"));
 		}
 	}
 
 	public void startClient() throws UnknownHostException, IOException {
-		try (Socket socket = new Socket(this.host, this.port)) {
-			reader = new BufferedReader(new InputStreamReader(System.in));
-			out = new PrintWriter(socket.getOutputStream());
-			in = new BufferedReader(new InputStreamReader(
-					socket.getInputStream()));
-			login();
+		try (Socket socket = new Socket(serverHost, serverPort)) {
+			userInputReader = new BufferedReader(new InputStreamReader(System.in));
+			clientOut = new PrintWriter(socket.getOutputStream());
+			clientIn = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+			logUser();
 			new Thread(this).start();
 			while (isActive()) {
-				String message = reader.readLine();
+				String message = userInputReader.readLine();
 				if (message != null && message.equals("#exit")) {
 					setActive(false);
 				}
@@ -107,8 +111,7 @@ public class Client implements Runnable {
 					System.out.println(message);
 				}
 			} catch (InterruptedException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
+				logger.error(e);
 				e.printStackTrace();
 			}
 		}
@@ -117,14 +120,12 @@ public class Client implements Runnable {
 	public static void main(String[] args) throws IOException {
 		try {
 			int port = Integer.parseInt(args[1]);
-			if (port > 1024 && port < 65535) {
-				logger.info("Server is listening at port " + port);
-			}
+			logger.info("Client selected port:" + port + "host:" + args[0]);
 			new Client(port, args[0]).startClient();
 		} catch (UnknownHostException e) {
-			e.printStackTrace();
+			System.out.println("Problem with server connection");
 			logger.error(e);
 		}
 	}
-	
+
 }

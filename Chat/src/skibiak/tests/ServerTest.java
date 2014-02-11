@@ -47,9 +47,9 @@ public class ServerTest {
 	public void addRoomToServerTest(){
 		when(room.getRoomName()).thenReturn("Teens");
 		
-		Assert.assertTrue(server.addRoomToServer(client, room));
+		Assert.assertTrue(server.addRoomToServer(room));
 		Assert.assertEquals(server.getRooms().get("Teens").getRoomName(),"Teens");
-		Assert.assertFalse(server.addRoomToServer(client, room));
+		Assert.assertFalse(server.addRoomToServer(room));
 	}
 	
 	@Test

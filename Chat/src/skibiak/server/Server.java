@@ -19,9 +19,8 @@ import org.apache.log4j.PropertyConfigurator;
 public class Server implements Runnable {
 	private static Logger logger = Logger.getLogger(Server.class);
 	private final Map<String, Room> rooms;
-
-	private boolean active = true;
 	private final ServerSocket serverSocket;
+	private boolean active = true;
 
 	public boolean isActive() {
 		return active;
@@ -38,39 +37,33 @@ public class Server implements Runnable {
 			rooms.put("MainRoom", RoomFactory.getInstance(this, "MainRoom",
 					"public", "Everything about Everyone"));
 		} catch (ClassNotFoundException e) {
+			logger.error(e);
 			throw new RuntimeException();
 		}
 	}
-	
+
 	@Override
 	public void run() {
 		new Thread(new ServerController()).start();
 		while (active) {
-			Socket clientSocket;
 			try {
-				clientSocket = serverSocket.accept();
+				Socket clientSocket = serverSocket.accept();
 				new Thread(new LogUser(clientSocket)).start();
 			} catch (SocketException e) {
 				logger.info("Socket closed");
 			} catch (IOException e) {
-				e.printStackTrace();
+				logger.error(e);
 			}
 		}
 	}
 
-	public boolean addRoomToServer(ClientConnectionAdapter client, Room room) {
+	public boolean addRoomToServer(Room room) {
 		String roomName = room.getRoomName();
 		if (!rooms.containsKey(roomName)) {
 			rooms.put(room.getRoomName(), room);
-			client.sendMessage(">Created room " + roomName);
 			return true;
-		} else {
-			logger.warn("User " + client.getUsername()
-					+ " tried to add room which already exist [" + roomName
-					+ "]");
-			client.sendMessage(">Room already exist");
-			return false;
 		}
+		return false;
 	}
 
 	public boolean containUser(String username) {
@@ -81,25 +74,24 @@ public class Server implements Runnable {
 		}
 		return false;
 	}
-	
+
 	public boolean addUserToRoom(ClientConnectionAdapter client, String roomName) {
 		if (rooms.containsKey(roomName)) {
 			Room room = rooms.get(roomName);
-			room.annouceMessage(">User " + client.getUsername()
-					+ " entered the room");
+			room.annouceMessage(">User " + client.getUsername() + " entered the room");
 			client.setPresentRoom(room);
 			room.addClient(client);
 			logger.info("User " + client.getUsername() + " added to room "
 					+ roomName);
 			return true;
 		} else {
-			logger.warn("User " + client.getUsername()
+			logger.info("User " + client.getUsername()
 					+ " has selected a room that does not exist [" + roomName
 					+ "]");
 			return false;
 		}
 	}
-	
+
 	public void closeServer() throws IOException {
 		for (Room room : rooms.values()) {
 			room.annouceMessage(">GoodBye!");
@@ -120,10 +112,9 @@ public class Server implements Runnable {
 				logger.error("Uncorect port");
 			}
 		} catch (NumberFormatException e) {
-			logger.error("No port provided");
-			e.printStackTrace();
+			logger.error("No port provided", e);
 		} catch (IOException e) {
-			e.printStackTrace();
+			logger.error(e);
 		}
 
 	}
@@ -134,34 +125,35 @@ public class Server implements Runnable {
 		public void run() {
 			try {
 				while (active) {
-					BufferedReader reader = new BufferedReader(
-							new InputStreamReader(System.in));
+					BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 					String message = reader.readLine();
 					if (message.equals("#exit")) {
 						closeServer();
 					}
 				}
 			} catch (IOException e) {
-				e.printStackTrace();
+				logger.error(e);
 			}
 		}
 	}
 
 	private class LogUser implements Runnable {
 		
-		private final ClientConnectionAdapter client;
 		private static final String USERNAME_PATTERN = "^[a-z0-9_-]{3,15}$";
+		private final ClientConnectionAdapter client;
 
-		private LogUser(Socket clientSocket) {
-			this.client = new ClientConnectionAdapter(clientSocket,
-					rooms.get("MainRoom"));
+		private LogUser(Socket clientSocket) throws IOException {
+			client = new ClientConnectionAdapter(clientSocket, rooms.get("MainRoom"));
 		}
 
 		private boolean validUsername(String username) {
-			Pattern pattern = Pattern.compile(USERNAME_PATTERN, Pattern.CASE_INSENSITIVE);
-			System.out.println(username);
-			Matcher matcher = pattern.matcher(username);
-			return matcher.matches();
+			if (username != null) {
+				Pattern pattern = Pattern.compile(USERNAME_PATTERN, Pattern.CASE_INSENSITIVE);
+				Matcher matcher = pattern.matcher(username);
+				return matcher.matches();
+			} else {
+				return false;
+			}
 		}
 
 		private boolean syncUserLogin(String username) {
@@ -169,8 +161,6 @@ public class Server implements Runnable {
 				synchronized (rooms.get("MainRoom")) {
 					if (!containUser(username)) {
 						client.setUsername(username);
-						client.sendMessage(">Welcome " + username + "!");
-						logger.info("User " + username + " has logged");
 						addUserToRoom(client, "MainRoom");
 						return true;
 					}
@@ -181,24 +171,26 @@ public class Server implements Runnable {
 
 		@Override
 		public void run() {
-			Boolean userFree = false;
+			Boolean nickFree = false;
 			client.sendMessage(">Please choose a username: ");
 			try {
-				while (!userFree) {
+				while (!nickFree) {
 					String username = client.readMessage();
-					if (username != null && validUsername(username)) {
-						userFree = syncUserLogin(username);
-						if (!userFree) {
+					if (validUsername(username)) {
+						nickFree = syncUserLogin(username);
+						if (!nickFree) {
 							client.sendMessage(">Username " + username
 									+ " is already in use. Try something else.");
+						} else {
+							client.sendMessage(">Welcome " + username + "!");
+							logger.info("User " + username + " has logged");
 						}
 					} else {
 						client.sendMessage(">Valid login consists of 3 to 15 alphanumeric (plus _-) symbols");
 					}
 				}
 			} catch (IOException e) {
-				e.printStackTrace();
-				logger.error("User left the chat before choosing username");
+				logger.error("User left the chat before choosing username", e);
 			}
 		}
 	}

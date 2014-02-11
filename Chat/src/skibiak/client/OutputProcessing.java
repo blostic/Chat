@@ -8,8 +8,8 @@ package skibiak.client;
 
 public class OutputProcessing {
 
-	private static char ESC = 0x1b;
-	private static String CSI = "" + ESC + '[';
+	private final static char ESC = 0x1b;
+	private final static String CSI = "" + ESC + '[';
 
 	public static String cursorUp(int n) {
 		return CSI + n + 'A';
@@ -26,7 +26,7 @@ public class OutputProcessing {
 				return cursorUp(1) + message;
 			} else {
 				return message;
-			}			
+			}
 		}
 		return null;
 	}

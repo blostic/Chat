@@ -14,7 +14,7 @@ public abstract class Room implements Runnable {
 	private final String roomName;
 	private String chatTopic;
 
-	final List<ClientConnectionAdapter> clients;
+	private final List<ClientConnectionAdapter> clients;
 	protected final Server server;
 
 	public Room(Server server, String roomName, String chatTopic) {

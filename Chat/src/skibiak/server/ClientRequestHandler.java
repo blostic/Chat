@@ -27,7 +27,7 @@ public class ClientRequestHandler {
 	@Parameter(names = { "-t", "-type" }, description = "Type of created room")
 	private String roomType = "";
 
-	@Parameter(names = { "-T", "-topic" }, description = "Topic of created room")
+	@Parameter(names = { "-T", "-topic" }, description = "Topic of created topic")
 	private String roomTopic = "";
 
 	public ClientRequestHandler(Server server, ClientConnectionAdapter client) {
@@ -55,26 +55,21 @@ public class ClientRequestHandler {
 
 	private void createRoom() {
 		try {
-			if (roomName.length() > 1 && roomType.length() > 1
-					&& roomTopic.length() > 1) {
-				Room room = RoomFactory.getInstance(server, roomName, roomType,
-						roomTopic);
-				if (server.addRoomToServer(client, room)) {
+			if (roomName != "" && roomType != "" && roomTopic != "") {
+				Room room = RoomFactory.getInstance(server, roomName, roomType, roomTopic);
+				if (server.addRoomToServer(room)) {
 					room.addClient(client);
 					client.setPresentRoom(room);
+					client.sendMessage(">Created room " + roomName);
 					logger.info(">" + client.getUsername() + " added room " + roomName);
+				} else {
+					client.sendMessage(">Room already exist");
 				}
 			} else {
-				logger.error(client.getUsername()
-						+ " didn't provide all required parameters to create new room");
 				client.sendMessage("You should provide all required parameters");
 			}
 		} catch (ClassNotFoundException e) {
-			logger.error(">" + client.getUsername()
-					+ " tried to add room of unrecognizable type [" + roomType
-					+ "]", e);
-			client.sendMessage("No such type of room");
-
+			client.sendMessage("No such type of room [" + roomType + "]");
 		}
 	}
 
@@ -102,7 +97,7 @@ public class ClientRequestHandler {
 		client.sendMessage(">Users in room "
 				+ client.getPresentRoom().getRoomName());
 		int counter = 1;
-		for (ClientConnectionAdapter connection : client.getPresentRoom().clients) {
+		for (ClientConnectionAdapter connection : client.getPresentRoom().getClients()) {
 			client.sendMessage(">" + counter + ".\t" + connection.getUsername());
 			counter++;
 		}
@@ -121,11 +116,9 @@ public class ClientRequestHandler {
 	}
 
 	public String replaceQuotation(String options) {
-		String regex = "\".*?\"";
-		Pattern p = Pattern.compile(regex);
+		Pattern p = Pattern.compile("\".*?\"");
 		Matcher m = p.matcher(options);
 		StringBuffer sb = new StringBuffer();
-
 		while (m.find()) {
 			String replacement = m.group().replace(" ", "#");
 			m.appendReplacement(sb, replacement);
@@ -158,8 +151,7 @@ public class ClientRequestHandler {
 		parseCommand(clientMessage);
 		if (commandList.contains(command)) {
 			try {
-				Method method = ClientRequestHandler.class
-						.getDeclaredMethod(command);
+				Method method = ClientRequestHandler.class.getDeclaredMethod(command);
 				method.invoke(this);
 			} catch (NoSuchMethodException | SecurityException
 					| IllegalAccessException | IllegalArgumentException
