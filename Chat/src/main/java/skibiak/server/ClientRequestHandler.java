@@ -1,4 +1,4 @@
-package skibiak.server;
+package main.java.skibiak.server;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -31,7 +31,7 @@ public class ClientRequestHandler {
 	private String roomTopic = "";
 
 	public ClientRequestHandler(Server server, ClientConnectionAdapter client) {
-		PropertyConfigurator.configure("log4j.properties");
+		PropertyConfigurator.configure("main/resources/log4j.properties");
 		logger.setLevel(Level.INFO);
 		this.server = server;
 		this.client = client;
@@ -44,9 +44,14 @@ public class ClientRequestHandler {
 	private void help() {
 		client.sendMessage("#createRoom -name roomName "
 				+ "-topic roomTopic -type [public|censored]\n"
+				+ "   >e.g. #createRoom -name \"Room 4242\" "
+				+ "-topic \"answer - question\" -type public \n"
 				+ "#switchRoom -name roomName\n"
-				+ "#changeTopic -topic roomTopic\n" + "#showTopic\n"
-				+ "#showRooms\n" + "#showUsers\n" + "#help\n" + "#exit\n");
+				+ "   >e.g. #switchRoom -name \"Room 4242\"\n"
+				+ "#changeTopic -topic roomTopic\n" 
+				+ "   >e.g. #changeTopic -topic \"question - answer\"\n"
+				+ "#showTopic\n"
+				+ "#showRooms\n" + "#showUsers\n" + "#help\n" + "#exit");
 	}
 
 	private void createRoom() {

@@ -1,4 +1,4 @@
-package skibiak.tests;
+package test.java.skibiak;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -7,16 +7,16 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
+import main.java.skibiak.server.ClientConnectionAdapter;
+import main.java.skibiak.server.ClientRequestHandler;
+import main.java.skibiak.server.Room;
+import main.java.skibiak.server.RoomFactory;
+import main.java.skibiak.server.Server;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
-import skibiak.server.ClientConnectionAdapter;
-import skibiak.server.ClientRequestHandler;
-import skibiak.server.Room;
-import skibiak.server.RoomFactory;
-import skibiak.server.Server;
 
 import com.beust.jcommander.ParameterException;
 

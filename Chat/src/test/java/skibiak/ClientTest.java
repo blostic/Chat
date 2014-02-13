@@ -1,4 +1,4 @@
-package skibiak.tests;
+package test.java.skibiak;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -7,10 +7,10 @@ import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+import main.java.skibiak.client.Client;
+
 import org.junit.Assert;
 import org.junit.Test;
-
-import skibiak.client.Client;
 
 public class ClientTest {
 

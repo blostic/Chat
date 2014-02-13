@@ -1,4 +1,4 @@
-package skibiak.server;
+package main.java.skibiak.server;
 
 public class PublicRoom extends Room {
 	public PublicRoom(Server server, String roomName, String chatTopic) {

@@ -1,4 +1,4 @@
-package skibiak.tests;
+package test.java.skibiak;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
@@ -8,14 +8,14 @@ import static org.mockito.Mockito.atLeast;
 
 import java.io.IOException;
 
+import main.java.skibiak.server.CensoredRoom;
+import main.java.skibiak.server.ClientConnectionAdapter;
+import main.java.skibiak.server.Server;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
-import skibiak.server.CensoredRoom;
-import skibiak.server.ClientConnectionAdapter;
-import skibiak.server.Server;
 public class CensoredRoomTest {
 
 	private static Server server = mock(Server.class);

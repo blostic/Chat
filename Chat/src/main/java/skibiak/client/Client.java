@@ -1,4 +1,4 @@
-package skibiak.client;
+package main.java.skibiak.client;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -7,11 +7,11 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
+import main.java.skibiak.server.Room;
+
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
-
-import skibiak.server.Room;
 
 public class Client implements Runnable {
 	private final static Logger logger = Logger.getLogger(Room.class);
@@ -41,7 +41,7 @@ public class Client implements Runnable {
 		this.serverPort = port;
 		this.serverHost = host;
 		
-		PropertyConfigurator.configure("log4j.properties");
+		PropertyConfigurator.configure("main/resources/log4j.properties");
 		logger.setLevel(Level.INFO);
 	}
 

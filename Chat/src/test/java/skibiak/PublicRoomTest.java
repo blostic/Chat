@@ -1,17 +1,17 @@
-package skibiak.tests;
+package test.java.skibiak;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import java.io.IOException;
 
+import main.java.skibiak.server.ClientConnectionAdapter;
+import main.java.skibiak.server.PublicRoom;
+import main.java.skibiak.server.Server;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-
-import skibiak.server.ClientConnectionAdapter;
-import skibiak.server.PublicRoom;
-import skibiak.server.Server;
 
 public class PublicRoomTest {
 	

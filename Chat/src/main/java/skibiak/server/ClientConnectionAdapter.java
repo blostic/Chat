@@ -1,4 +1,4 @@
-package skibiak.server;
+package main.java.skibiak.server;
 
 import java.io.BufferedReader;
 import java.io.IOException;

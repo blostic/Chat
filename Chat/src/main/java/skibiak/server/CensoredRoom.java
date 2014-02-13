@@ -1,4 +1,4 @@
-package skibiak.server;
+package main.java.skibiak.server;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -21,7 +21,7 @@ public class CensoredRoom extends Room {
 		super(server, roomName, chatTopic);
 		this.trie = new Trie().removeOverlaps().onlyWholeWords().caseInsensitive();
 		try {
-			this.addBannedWords("wordsToAvoid.txt");
+			this.addBannedWords("main/resources/wordsToAvoid.txt");
 		} catch (IOException e) {
 			logger.warn("No default file with swears",e);
 		}

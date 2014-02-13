@@ -1,4 +1,4 @@
-package skibiak.client;
+package main.java.skibiak.client;
 
 /**
  * Class is used to controll a console display

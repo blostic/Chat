@@ -1,4 +1,4 @@
-package skibiak.server;
+package main.java.skibiak.server;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -25,7 +25,7 @@ public abstract class Room implements Runnable {
 		this.roomName = roomName;
 		this.server = server;
 
-		PropertyConfigurator.configure("log4j.properties");
+		PropertyConfigurator.configure("main/resources/log4j.properties");
 		logger.setLevel(Level.INFO);
 	}
 

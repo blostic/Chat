@@ -1,4 +1,4 @@
-package skibiak.server;
+package main.java.skibiak.server;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -102,7 +102,7 @@ public class Server implements Runnable {
 
 	public static void main(String[] args) {
 		if (args.length == 1) {
-			PropertyConfigurator.configure("log4j.properties");
+			PropertyConfigurator.configure("main/resources/log4j.properties");
 			logger.setLevel(Level.INFO);
 			try {
 				int port = Integer.parseInt(args[0]);

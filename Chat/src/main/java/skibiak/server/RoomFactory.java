@@ -1,4 +1,4 @@
-package skibiak.server;
+package main.java.skibiak.server;
 
 public class RoomFactory {
 	public static Room getInstance(Server server, String name, String type,
