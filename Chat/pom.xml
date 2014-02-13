@@ -55,11 +55,6 @@
 				<configuration>
 					<source>1.7</source>
 					<target>1.7</target>
-					<archive>
-						<manifest>
-							<mainClass>skibiak.server.Server</mainClass>
-						</manifest>
-					</archive>
 					<encoding>${project.build.sourceEncoding}</encoding>
 					<executable>${env.JAVA_7_HOME}</executable>
 				</configuration>

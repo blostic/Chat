@@ -114,7 +114,7 @@ public class Server implements Runnable {
 				System.out.println("The Chat server is listniening at port "
 						+ port + "\nType \"#exit\" to exit the server");
 			} catch (NumberFormatException e) {
-				logger.error("No port provided", e);
+				System.out.println("Port number should be integer value.");
 			} catch (IOException e) {
 				logger.error(e);
 			}
