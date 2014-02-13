@@ -7,14 +7,16 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
-import main.java.skibiak.server.Room;
-
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 
 public class Client implements Runnable {
-	private final static Logger logger = Logger.getLogger(Room.class);
+	private final static Logger logger = Logger.getLogger(Client.class);
+	static {
+		PropertyConfigurator.configure("main/resources/log4j.properties");
+		logger.setLevel(Level.INFO);
+	}
 	
 	private final int serverPort;
 	private final String serverHost;
@@ -39,10 +41,7 @@ public class Client implements Runnable {
 	
 	public Client(int port, String host) {
 		this.serverPort = port;
-		this.serverHost = host;
-		
-		PropertyConfigurator.configure("main/resources/log4j.properties");
-		logger.setLevel(Level.INFO);
+		this.serverHost = host;		
 	}
 
 	public void sendClientMessage(String message) throws IOException {
@@ -73,7 +72,9 @@ public class Client implements Runnable {
 	}
 
 	public void logUser() throws IOException {
-		System.out.println(readServerMessages());
+		String message = readServerMessages();
+		System.out.println("User successfully connected to the server");
+		System.out.println(message);
 		boolean isNickCorrect = false;
 		while (!isNickCorrect) {
 			nickname = userInputReader.readLine();
@@ -121,7 +122,7 @@ public class Client implements Runnable {
 		if (args.length == 2) {
 			try {
 				int port = Integer.parseInt(args[1]);
-				logger.info("Client selected port:" + port + "host:" + args[0]);
+				logger.info("Client selected port:" + port + " host:" + args[0]);
 				new Client(port, args[0]).startClient();
 			} catch (NumberFormatException e) {
 				System.out.println("Port number should be integer value.");

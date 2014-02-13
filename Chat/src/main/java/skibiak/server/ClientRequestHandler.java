@@ -16,7 +16,11 @@ import com.beust.jcommander.Parameter;
 import com.beust.jcommander.ParameterException;
 
 public class ClientRequestHandler {
-	private static Logger logger = Logger.getLogger(Server.class);
+	private static Logger logger = Logger.getLogger(ClientRequestHandler.class);
+	static {
+		PropertyConfigurator.configure("main/resources/log4j.properties");
+		logger.setLevel(Level.INFO);
+	}
 	private ClientConnectionAdapter client;
 	private String command;
 	private Server server;
@@ -31,25 +35,23 @@ public class ClientRequestHandler {
 	private String roomTopic = "";
 
 	public ClientRequestHandler(Server server, ClientConnectionAdapter client) {
-		PropertyConfigurator.configure("main/resources/log4j.properties");
-		logger.setLevel(Level.INFO);
 		this.server = server;
 		this.client = client;
 	}
 
-	private List<String> commandList = Arrays.asList("createRoom",
+	private List<String> avaliableCommandList = Arrays.asList("createRoom",
 			"switchRoom", "changeTopic", "showTopic", "showRooms", "showUsers",
 			"help", "exit");
 
 	private void help() {
 		client.sendMessage("#createRoom -name roomName "
 				+ "-topic roomTopic -type [public|censored]\n"
-				+ "   >e.g. #createRoom -name \"Room 4242\" "
+				+ "  >e.g. #createRoom -name \"Room 4242\" "
 				+ "-topic \"answer - question\" -type public \n"
 				+ "#switchRoom -name roomName\n"
-				+ "   >e.g. #switchRoom -name \"Room 4242\"\n"
+				+ "  >e.g. #switchRoom -name \"Room 4242\"\n"
 				+ "#changeTopic -topic roomTopic\n" 
-				+ "   >e.g. #changeTopic -topic \"question - answer\"\n"
+				+ "  >e.g. #changeTopic -topic \"question - answer\"\n"
 				+ "#showTopic\n"
 				+ "#showRooms\n" + "#showUsers\n" + "#help\n" + "#exit");
 	}
@@ -147,7 +149,7 @@ public class ClientRequestHandler {
 
 	public void executeCommand(String clientMessage) throws ParameterException {
 		parseCommand(clientMessage);
-		if (commandList.contains(command)) {
+		if (avaliableCommandList.contains(command)) {
 			try {
 				Method method = ClientRequestHandler.class.getDeclaredMethod(command);
 				method.invoke(this);

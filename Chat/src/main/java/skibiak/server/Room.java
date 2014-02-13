@@ -12,21 +12,23 @@ import org.apache.log4j.PropertyConfigurator;
 import com.beust.jcommander.ParameterException;
 
 public abstract class Room implements Runnable {
+	protected static Logger logger = Logger.getLogger(Room.class);
+	static {
+		PropertyConfigurator.configure("main/resources/log4j.properties");
+		logger.setLevel(Level.INFO);
+	}
+	
 	private final String roomName;
 	private String chatTopic;
 
 	private final List<ClientConnectionAdapter> clients;
 	protected final Server server;
-	protected static Logger logger = Logger.getLogger(Room.class);
 
 	public Room(Server server, String roomName, String chatTopic) {
 		this.clients = new CopyOnWriteArrayList<ClientConnectionAdapter>();
 		this.chatTopic = chatTopic;
 		this.roomName = roomName;
 		this.server = server;
-
-		PropertyConfigurator.configure("main/resources/log4j.properties");
-		logger.setLevel(Level.INFO);
 	}
 
 	public abstract void annouceMessage(String message);

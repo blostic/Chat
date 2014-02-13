@@ -18,6 +18,11 @@ import org.apache.log4j.PropertyConfigurator;
 
 public class Server implements Runnable {
 	private static Logger logger = Logger.getLogger(Server.class);
+	static {
+		PropertyConfigurator.configure("main/resources/log4j.properties");
+		logger.setLevel(Level.INFO);
+	}
+	
 	private final Map<String, Room> rooms;
 	private final ServerSocket serverSocket;
 	private boolean active = true;
@@ -102,8 +107,6 @@ public class Server implements Runnable {
 
 	public static void main(String[] args) {
 		if (args.length == 1) {
-			PropertyConfigurator.configure("main/resources/log4j.properties");
-			logger.setLevel(Level.INFO);
 			try {
 				int port = Integer.parseInt(args[0]);
 				logger.info("Server is listening at port " + port);
