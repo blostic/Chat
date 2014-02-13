@@ -4,7 +4,9 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
@@ -24,23 +26,26 @@ public class ServerTest {
 	static private Room room = mock(Room.class);
 	static private ClientConnectionAdapter client = mock(ClientConnectionAdapter.class);
 	static private ClientConnectionAdapter client2 = mock(ClientConnectionAdapter.class);
-	
-	
+		
 	private static Server server;
 	
 	@Before
 	public void setUp() throws IOException{
-		server = new Server(4002);		
+		server = new Server(4002);
 	}
 
 	@After
-    public void tearDown() throws IOException {
+    public void tearDown() throws IOException, InterruptedException {
         server.closeServer();
+        Thread.sleep(50);
     }
 	
 	@Test
-	public void runServerTest() throws InterruptedException{
+	public void runServerTest() throws UnknownHostException, IOException{
 		new Thread(server).start();
+		Socket socket = new Socket("localhost",4002);
+		Assert.assertTrue(socket.isConnected());
+		socket.close();
 	}
 
 	@Test
@@ -54,32 +59,55 @@ public class ServerTest {
 	
 	@Test
 	public void addUserToRoomTest(){
+		when(client.getUsername()).thenReturn("TestUser");
+		when(client2.getUsername()).thenReturn("TestUser2");
+		Assert.assertTrue(server.addUserToRoom(client, "MainRoom"));
+		Assert.assertFalse(server.addUserToRoom(client2, "MainRoo2"));
 		
-		when(client2.getUsername()).thenReturn("TestUser");
-		server.addUserToRoom(client2, "MainRoom");
-		server.addUserToRoom(client2, "MainRoo2");
-		
-		
-		Assert.assertTrue(server.containUser("TestUser"));
-		Assert.assertFalse(server.containUser("Test"));
+		Assert.assertTrue(server.containsUser("TestUser"));
+		Assert.assertFalse(server.containsUser("TestUser2"));
 		
 	}
 	
 	@Test
-	public void serverPlusClientTest() throws UnknownHostException, IOException, InterruptedException {
+	public void incorectNicknameTest() throws UnknownHostException, IOException {
+		new Thread(server).start();
+		try (Socket socket = new Socket("localhost", 4002)) {
+			BufferedReader in = new BufferedReader(new InputStreamReader(
+					socket.getInputStream()));
+			PrintWriter out = new PrintWriter(socket.getOutputStream());
+			Assert.assertTrue(in.readLine().equals(
+					">Please choose a username: "));
+			out.write("Be\n");
+			out.flush();
+			Assert.assertTrue(in.readLine().equals(
+					">Valid login consists of 3 to 15 "
+							+ "alphanumeric (plus _-) symbols"));
+			out.write("Be!@#!#%@#$!\n");
+			out.flush();
+			Assert.assertTrue(in.readLine().equals(
+					">Valid login consists of 3 to 15 "
+							+ "alphanumeric (plus _-) symbols"));
+		}
+	}
+	
+	@Test
+	public void repeatedNicknameTest() throws UnknownHostException, IOException {
 		new Thread(server).start();
 		try (	Socket socket = new Socket("localhost", 4002);
 				Socket socket2 = new Socket("localhost", 4002)) {
 
 			BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-			PrintWriter out = new PrintWriter(socket.getOutputStream());			
+			PrintWriter out = new PrintWriter(socket.getOutputStream());
 			Assert.assertTrue(in.readLine().equals(">Please choose a username: "));
 			out.write("Benek\n");
 			out.flush();
 			Assert.assertTrue(in.readLine().equals(">Welcome Benek!"));
-			
+			Assert.assertTrue(in.readLine()
+					.equals(">Type #help to familiarize yourself with the chat capabilities"));
+
 			BufferedReader in2 = new BufferedReader(new InputStreamReader(socket2.getInputStream()));
-			PrintWriter out2 = new PrintWriter(socket2.getOutputStream());			
+			PrintWriter out2 = new PrintWriter(socket2.getOutputStream());
 			Assert.assertTrue(in2.readLine().equals(">Please choose a username: "));
 			out2.write("Benek\n");
 			out2.flush();
@@ -96,7 +124,17 @@ public class ServerTest {
 			out.close();
 			out2.close();
 		}
-		server.closeServer();
 	}
 	
+	@Test
+	public void serverControllerTest() throws InterruptedException, IOException{
+		new Thread(server).start();
+		String data = "noteExactlyWhatWeWant\n#exit\n";
+		InputStream old = System.in;
+		InputStream testInput = new ByteArrayInputStream(data.getBytes("UTF-8"));
+		System.setIn(testInput);
+		Thread.sleep(200);
+		System.setIn(old);
+		Assert.assertFalse(server.isActive());
+	}
 }

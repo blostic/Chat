@@ -29,7 +29,7 @@ public class Server implements Runnable {
 	public Map<String, Room> getRooms() {
 		return rooms;
 	}
-
+	
 	public Server(int port) throws IOException {
 		this.serverSocket = new ServerSocket(port);
 		this.rooms = Collections.synchronizedMap(new HashMap<String, Room>());
@@ -66,7 +66,7 @@ public class Server implements Runnable {
 		return false;
 	}
 
-	public boolean containUser(String username) {
+	public boolean containsUser(String username) {
 		for (Room room : rooms.values()) {
 			if (room.containUser(username)) {
 				return true;
@@ -99,35 +99,41 @@ public class Server implements Runnable {
 		active = false;
 		serverSocket.close();
 	}
-	
+
 	public static void main(String[] args) {
-		PropertyConfigurator.configure("log4j.properties");
-		try {
+		if (args.length == 1) {
+			PropertyConfigurator.configure("log4j.properties");
 			logger.setLevel(Level.INFO);
-			int port = Integer.parseInt(args[0]);
-			if (port > 1024 && port < 65535) {
+			try {
+				int port = Integer.parseInt(args[0]);
 				logger.info("Server is listening at port " + port);
 				new Thread(new Server(port)).start();
-			} else {
-				logger.error("Uncorect port");
+				System.out.println("The Chat server is listniening at port "
+						+ port + "\nType \"#exit\" to exit the server");
+			} catch (NumberFormatException e) {
+				logger.error("No port provided", e);
+			} catch (IOException e) {
+				logger.error(e);
 			}
-		} catch (NumberFormatException e) {
-			logger.error("No port provided", e);
-		} catch (IOException e) {
-			logger.error(e);
-		}
-
+		} else {
+			System.out.println("Usage:\njava -jar server.jar portNumber");
+		}		
 	}
-
+	
+	/**
+	 * ServerController allows server administrators to shut down the server by
+	 * typing #exit command.
+	 */
+	
 	private class ServerController implements Runnable {
-
+		
 		@Override
 		public void run() {
 			try {
+				BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 				while (active) {
-					BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 					String message = reader.readLine();
-					if (message.equals("#exit")) {
+					if (message != null && message.equals("#exit")) {
 						closeServer();
 					}
 				}
@@ -136,7 +142,12 @@ public class Server implements Runnable {
 			}
 		}
 	}
-
+	
+	/**
+	 * LogUser responsibility is to properly log a user into chat. 
+	 * By default, user is placed into MainRoom.
+	 */
+	
 	private class LogUser implements Runnable {
 		
 		private static final String USERNAME_PATTERN = "^[a-z0-9_-]{3,15}$";
@@ -157,9 +168,9 @@ public class Server implements Runnable {
 		}
 
 		private boolean syncUserLogin(String username) {
-			if (!containUser(username)) {
+			if (!containsUser(username)) {
 				synchronized (rooms.get("MainRoom")) {
-					if (!containUser(username)) {
+					if (!containsUser(username)) {
 						client.setUsername(username);
 						addUserToRoom(client, "MainRoom");
 						return true;
@@ -183,10 +194,13 @@ public class Server implements Runnable {
 									+ " is already in use. Try something else.");
 						} else {
 							client.sendMessage(">Welcome " + username + "!");
+							client.sendMessage(">Type #help to familiarize"
+									+ " yourself with the chat capabilities");
 							logger.info("User " + username + " has logged");
 						}
 					} else {
-						client.sendMessage(">Valid login consists of 3 to 15 alphanumeric (plus _-) symbols");
+						client.sendMessage(">Valid login consists of 3 to 15 "
+								+ "alphanumeric (plus _-) symbols");
 					}
 				}
 			} catch (IOException e) {

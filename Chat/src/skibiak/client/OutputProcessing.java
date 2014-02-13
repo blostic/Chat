@@ -18,11 +18,11 @@ public class OutputProcessing {
 	public static String cursorDown(int n) {
 		return CSI + n + 'B';
 	}
-	
-	public static String processInput(String message, String nickname){
-		if(message!=null){
+
+	public static String processInput(String message, String nickname) {
+		if (message != null) {
 			String nick = message.split(":")[0];
-			if (nick.equals(nickname)){
+			if (nick != null && nick.equals(nickname)) {
 				return cursorUp(1) + message;
 			} else {
 				return message;
@@ -30,5 +30,5 @@ public class OutputProcessing {
 		}
 		return null;
 	}
-	
+
 }

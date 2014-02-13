@@ -105,7 +105,7 @@ public class Client implements Runnable {
 	public void run() {
 		while (isActive()) {
 			try {
-				Thread.sleep(100);
+				Thread.sleep(10);
 				String message = this.readServerMessages();
 				if (message != null) {
 					System.out.println(message);
@@ -117,14 +117,22 @@ public class Client implements Runnable {
 		}
 	}
 
-	public static void main(String[] args) throws IOException {
-		try {
-			int port = Integer.parseInt(args[1]);
-			logger.info("Client selected port:" + port + "host:" + args[0]);
-			new Client(port, args[0]).startClient();
-		} catch (UnknownHostException e) {
-			System.out.println("Problem with server connection");
-			logger.error(e);
+	public static void main(String[] args) {
+		if (args.length == 2) {
+			try {
+				int port = Integer.parseInt(args[1]);
+				logger.info("Client selected port:" + port + "host:" + args[0]);
+				new Client(port, args[0]).startClient();
+			} catch (NumberFormatException e) {
+				System.out.println("Port number should be integer value.");
+			} catch (IOException e) {
+				System.out.println("Problem with server connection. "
+						+ "Please contact the server administrator "
+						+ "to resolve this issue.");
+				logger.error(e);
+			}
+		} else {
+			System.out.println("Usage:\njava -jar client.jar host portNumber");
 		}
 	}
 

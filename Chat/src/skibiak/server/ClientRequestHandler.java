@@ -35,7 +35,6 @@ public class ClientRequestHandler {
 		logger.setLevel(Level.INFO);
 		this.server = server;
 		this.client = client;
-
 	}
 
 	private List<String> commandList = Arrays.asList("createRoom",
@@ -43,19 +42,16 @@ public class ClientRequestHandler {
 			"help", "exit");
 
 	private void help() {
-		client.sendMessage("#createRoom  -name roomName -topic roomTopic -type [public|censored]");
-		client.sendMessage("#switchRoom  -name roomName");
-		client.sendMessage("#changeTopic -topic roomTopic");
-		client.sendMessage("#showTopic");
-		client.sendMessage("#showRooms");
-		client.sendMessage("#showUsers");
-		client.sendMessage("#help");
-		client.sendMessage("#exit");
+		client.sendMessage("#createRoom -name roomName "
+				+ "-topic roomTopic -type [public|censored]\n"
+				+ "#switchRoom -name roomName\n"
+				+ "#changeTopic -topic roomTopic\n" + "#showTopic\n"
+				+ "#showRooms\n" + "#showUsers\n" + "#help\n" + "#exit\n");
 	}
 
 	private void createRoom() {
 		try {
-			if (roomName != "" && roomType != "" && roomTopic != "") {
+			if (!roomName.equals("") && !roomType.equals("") && !roomTopic.equals("")) {
 				Room room = RoomFactory.getInstance(server, roomName, roomType, roomTopic);
 				if (server.addRoomToServer(room)) {
 					room.addClient(client);
@@ -75,7 +71,7 @@ public class ClientRequestHandler {
 
 	private void switchRoom() {
 		if( server.addUserToRoom(client, roomName )){
-			client.sendMessage(">Switched to " + roomName);			
+			client.sendMessage(">Switched to " + roomName);
 		} else {
 			client.sendMessage("Room doesn't exist");
 		}
@@ -85,7 +81,6 @@ public class ClientRequestHandler {
 		client.getPresentRoom().setChatTopic(roomTopic);
 		client.getPresentRoom().annouceMessage(
 				">" + client.getUsername() + " changed topic to: " + roomTopic);
-		client.sendMessage(">Topic changed to " + roomTopic);
 		logger.info(client.getUsername() + " changed topic to: " + roomTopic);
 	}
 
@@ -106,12 +101,14 @@ public class ClientRequestHandler {
 	private void showRooms() {
 		for (Room room : server.getRooms().values()) {
 			client.sendMessage(">Room name: " + room.getRoomName()
-					+ " | Topic: " + room.getChatTopic());
+					+ ", Topic: " + room.getChatTopic());
 		}
 	}
 
 	private void exit() {
-		client.getPresentRoom().removeClient(client);
+		Room room = client.getPresentRoom();
+		room.removeClient(client);
+		room.annouceMessage(">User: " + client.getUsername() + " left the chat");
 		client.sendMessage(">GoodBye!");
 	}
 
@@ -135,14 +132,10 @@ public class ClientRequestHandler {
 		try {
 			new JCommander(this, Arrays.copyOfRange(paramaters, 1,
 					paramaters.length));
-			logger.info("Command from user " + client.getUsername()
-					+ " parsed correctly");
 			roomName = roomName.replace("#", " ");
 			roomTopic = roomTopic.replace("#", " ");
-			System.out.println(this.command + " " + this.roomName + " "
-					+ roomTopic + " " + roomType);
 		} catch (ParameterException e) {
-			logger.error("Unknow option provided by " + client.getUsername());
+			logger.warn("Unknow option provided by " + client.getUsername());
 			throw new ParameterException(e);
 		}
 	}

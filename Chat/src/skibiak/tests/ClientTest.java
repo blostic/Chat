@@ -45,7 +45,7 @@ public class ClientTest {
 		InputStream testInput = new ByteArrayInputStream(data.getBytes("UTF-8"));
 		System.setIn(testInput);
 		
-		client = new Client(4001, "localhost");		
+		client = new Client(4001, "localhost");
 		Thread.sleep(100);
 		
 		client.startClient();

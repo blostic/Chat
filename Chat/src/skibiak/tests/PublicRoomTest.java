@@ -28,20 +28,20 @@ public class PublicRoomTest {
 
 	@Test
 	public void readAndAnnounceMessageTest() throws IOException{
-		room.readMessages();
+		room.handleClients();
 		room.addClient(client);
-		room.readMessages();
+		room.handleClients();
 		
 		when(client.containMessage()).thenReturn(true);
 		when(client.readMessage()).thenReturn("Some Message");
 		
-		room.readMessages();
+		room.handleClients();
 		
 		when(client.readMessage()).thenReturn("#test");
-		room.readMessages();
+		room.handleClients();
 		
 		when(client.readMessage()).thenReturn("#test -strange option");
-		room.readMessages();
+		room.handleClients();
 		
 		when(server.isActive()).thenReturn(false);
 	}
@@ -59,7 +59,7 @@ public class PublicRoomTest {
 	
 	@Test
 	public void removeUnresponsiveClients(){
-		when(client.getUsername()).thenReturn("Benek");		
+		when(client.getUsername()).thenReturn("Benek");
 		room.addClient(client);
 		
 		when(client.clientDisconected()).thenReturn(false);

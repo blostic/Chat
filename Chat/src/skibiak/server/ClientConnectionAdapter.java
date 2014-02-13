@@ -7,19 +7,11 @@ import java.io.PrintWriter;
 import java.net.Socket;
 
 public class ClientConnectionAdapter {
-	private String username;
 	private Room presentRoom;
+	private String username;
 	private final PrintWriter out;
 	private final BufferedReader in;
 
-	public Room getPresentRoom() {
-		return presentRoom;
-	}
-
-	public void setPresentRoom(Room presentRoom) {
-		this.presentRoom.removeClient(this);
-		this.presentRoom = presentRoom;
-	}
 
 	public ClientConnectionAdapter(Socket socket, Room presetRoom)
 			throws IOException {
@@ -27,6 +19,15 @@ public class ClientConnectionAdapter {
 		out = new PrintWriter(socket.getOutputStream());
 		in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
+	}
+
+	public Room getPresentRoom() {
+		return presentRoom;
+	}
+	
+	public void setPresentRoom(Room targetRoom) {
+		presentRoom.removeClient(this);
+		presentRoom = targetRoom;
 	}
 
 	public String getUsername() {

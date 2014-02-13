@@ -9,27 +9,27 @@ import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 
+import com.beust.jcommander.ParameterException;
+
 public abstract class Room implements Runnable {
-	private static Logger logger = Logger.getLogger(Room.class);
 	private final String roomName;
 	private String chatTopic;
 
 	private final List<ClientConnectionAdapter> clients;
 	protected final Server server;
+	protected static Logger logger = Logger.getLogger(Room.class);
 
 	public Room(Server server, String roomName, String chatTopic) {
+		this.clients = new CopyOnWriteArrayList<ClientConnectionAdapter>();
 		this.chatTopic = chatTopic;
 		this.roomName = roomName;
-		this.clients = new CopyOnWriteArrayList<ClientConnectionAdapter>();
 		this.server = server;
 
 		PropertyConfigurator.configure("log4j.properties");
 		logger.setLevel(Level.INFO);
 	}
 
-	public List<ClientConnectionAdapter> getClients() {
-		return clients;
-	}
+	public abstract void annouceMessage(String message);
 
 	public void startRoom() {
 		new Thread(this).start();
@@ -49,6 +49,47 @@ public abstract class Room implements Runnable {
 		};
 	}
 
+	public void run() {
+		while (server.isActive()) {
+			try {
+				Thread.sleep(10);
+				handleClients();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	public void handleClients() throws IOException {
+		for (ClientConnectionAdapter connection : this.getClients()) {
+			if (connection.containMessage()) {
+				String message = connection.readMessage();
+				if (!message.startsWith("#")) {
+					annouceMessage(connection.getUsername() + ": " + message);
+				} else {
+					try {
+						new ClientRequestHandler(server, connection)
+								.executeCommand(message);
+					} catch (ParameterException e) {
+						connection.sendMessage(">No such option, "
+								+ "use #help to check correct syntax");
+					}
+				}
+			}
+		}
+	}
+
+	public boolean containUser(String username){
+		for (ClientConnectionAdapter clientConnection : this.getClients()) {
+			if (clientConnection.getUsername().equals(username)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	public void removeUnresponsiveClients() {
 		List<ClientConnectionAdapter> clientsToRemove = new ArrayList<ClientConnectionAdapter>();
 		for (ClientConnectionAdapter clientConnection : getClients()) {
@@ -56,20 +97,16 @@ public abstract class Room implements Runnable {
 				clientsToRemove.add(clientConnection);
 			}
 		}
-		for (ClientConnectionAdapter client : clientsToRemove) {
-			removeClient(client);
-		}
+		clients.removeAll(clientsToRemove);
 	}
 
 	public void addClient(ClientConnectionAdapter client) {
+		clients.add(client);
 		logger.info("Client " + client.getUsername() + " entered room: "
 				+ this.roomName);
-		clients.add(client);
 	}
 
 	public void removeClient(ClientConnectionAdapter client) {
-		logger.info("Client " + client.getUsername() + " left room: "
-				+ this.roomName);
 		clients.remove(client);
 	}
 
@@ -84,18 +121,9 @@ public abstract class Room implements Runnable {
 	public String getRoomName() {
 		return roomName;
 	}
-
-	public abstract void annouceMessage(String message);
-
-	public abstract void readMessages() throws IOException;
-
-	public boolean containUser(String username){
-		for (ClientConnectionAdapter clientConnection : this.getClients()) {
-			if (clientConnection.getUsername().equals(username)) {
-				return true;
-			}
-		}
-		return false;
+	
+	public List<ClientConnectionAdapter> getClients() {
+		return clients;
 	}
-
+	
 }

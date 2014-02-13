@@ -8,8 +8,6 @@ import java.util.Collection;
 import org.ahocorasick.trie.Token;
 import org.ahocorasick.trie.Trie;
 
-import com.beust.jcommander.ParameterException;
-
 public class CensoredRoom extends Room {
 
 	/**
@@ -25,23 +23,9 @@ public class CensoredRoom extends Room {
 		try {
 			this.addBannedWords("wordsToAvoid.txt");
 		} catch (IOException e) {
-			e.printStackTrace(); 	// No default file with swears
+			logger.warn("No default file with swears",e);
 		}
 		this.startRoom();
-	}
-
-	@Override
-	public void run() {
-		while (server.isActive()) {
-			try {
-				Thread.sleep(100);
-				this.readMessages();
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
 	}
 
 	public final void addBannedWords(String filePath) throws IOException {
@@ -74,30 +58,10 @@ public class CensoredRoom extends Room {
 
 	@Override
 	public void annouceMessage(String message) {
-		System.out.println("MESSAGE [" + getRoomName() + "] "
-				+ message);
+		System.out.println(" MESSAGE [" + getRoomName() + "] " + message);
+		message = censureMessage(message);
 		for (ClientConnectionAdapter connection : this.getClients()) {
 			connection.sendMessage(message);
-		}
-	}
-
-	@Override
-	public void readMessages() throws IOException {
-		for (ClientConnectionAdapter connection : this.getClients()) {
-			if (connection.containMessage()) {
-				String message = connection.readMessage();
-				message = censureMessage(message);
-				if (!message.startsWith("#")) {
-					annouceMessage(connection.getUsername() + ": " + message);
-				} else {
-					try {
-						new ClientRequestHandler(server, connection)
-								.executeCommand(message);
-					} catch (ParameterException e) {
-						connection.sendMessage(">No such option, use #help to check correct syntax");
-					}
-				}
-			}
 		}
 	}
 

@@ -1,28 +1,36 @@
 package skibiak.tests;
 
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.atLeast;
 
 import java.io.IOException;
 
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import skibiak.server.CensoredRoom;
 import skibiak.server.ClientConnectionAdapter;
 import skibiak.server.Server;
-
 public class CensoredRoomTest {
 
-	private Server server = mock(Server.class);
-	private ClientConnectionAdapter client = mock(ClientConnectionAdapter.class);
+	private static Server server = mock(Server.class);
+	private static ClientConnectionAdapter client = mock(ClientConnectionAdapter.class);
 	
 	private CensoredRoom room;
 
+	@BeforeClass
+	public static void setMock(){
+		when(server.isActive()).thenReturn(true);
+		when(client.getUsername()).thenReturn("Nemo");
+	}
+	
 	@Before
 	public void setUp() {
-		when(server.isActive()).thenReturn(true);
 		room = new CensoredRoom(server, "test room", "test topic");
 	}
 
@@ -49,23 +57,15 @@ public class CensoredRoomTest {
 	}
 	
 	@Test
-	public void readAndAnnounceMessageTest() throws IOException{
-		room.readMessages();
+	public void readAndAnnounceMessageTest() throws IOException, InterruptedException{
 		room.addClient(client);
-		room.readMessages();
-		
+		verify(client, times(0)).readMessage();
 		when(client.containMessage()).thenReturn(true);
 		when(client.readMessage()).thenReturn("Some Message");
-		
-		room.readMessages();
-		
+		Thread.sleep(50);
+		verify(client, atLeast(1)).readMessage();
 		when(client.readMessage()).thenReturn("#test");
-		room.readMessages();
-		
-		when(client.readMessage()).thenReturn("#test -strange option");
-		room.readMessages();
-		
-		when(server.isActive()).thenReturn(false);
+		verify(client, atLeast(1)).sendMessage("Nemo: Some Message");
 	}
 	
 }
